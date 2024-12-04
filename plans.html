@@ -3,6 +3,7 @@
 
 
 <!-- Mirrored from rn53themes.net/themes/matrimo/plans.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 27 Nov 2024 05:15:37 GMT -->
+
 <head>
     <title>Wedding Matrimony</title>
     <!--== META TAGS ==-->
@@ -19,6 +20,12 @@
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/animate.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.5.0/dist/sweetalert2.min.css">
+
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.5.0/dist/sweetalert2.min.js"></script>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -28,24 +35,8 @@
                 }).then((res) => {
                     document.getElementById('topheader').innerHTML = res;
                 })
-                 
-            fetch('./component/sidebar.html')
-                .then((res)=>res.text())
-                 .then((res)=>{
-                    document.getElementById('newsidebar').innerHTML=res;
-                 })
-
-                 fetch('./component/header.html')
-                .then((res)=>res.text())
-                 .then((res)=>{
-                    document.getElementById('mainheader').innerHTML=res;
-                 })
-
-
-            }
-    )
-
-
+        }
+        )
     </script>
 </head>
 
@@ -62,7 +53,7 @@
     <!-- END PRELOADER -->
 
     <!-- SEARCH -->
-   
+
     <!-- END PRELOADER -->
 
     <!-- HEADER & MENU -->
@@ -82,7 +73,8 @@
                 <li><a href="#!"><i class="fa fa-phone" aria-hidden="true"></i>+92 (8800) 68 - 8960</a></li>
                 <li><a href="#!"><i class="fa fa-whatsapp" aria-hidden="true"></i>+92 (8800) 68 - 8960</a></li>
                 <li><a href="#!"><i class="fa fa-envelope-o" aria-hidden="true"></i>help@company.com</a></li>
-                <li><a href="#!"><i class="fa fa-map-marker" aria-hidden="true"></i>3812 Lena Lane City Jackson Mississippi</a></li>
+                <li><a href="#!"><i class="fa fa-map-marker" aria-hidden="true"></i>3812 Lena Lane City Jackson
+                        Mississippi</a></li>
             </ul>
             <div class="menu-pop-help">
                 <h4>Support Team</h4>
@@ -188,50 +180,51 @@
         <div class="container" style="padding-inline: 2px;">
             <div class="row">
                 <div class="hom-nav">
-              
-                    <div class="logo">  
-                        <a href="index.html" class="logo-brand"><img src="images/logo-b.png" alt="" loading="lazy"  class="ic-logo"></a>
+
+                    <div class="logo">
+                        <a href="index.html" class="logo-brand"><img src="images/logo-b.png" alt="" loading="lazy"
+                                class="ic-logo"></a>
                     </div>
-            
+
                     <div class="bl">
                         <ul>
                             <li class="smenu-pare">
                                 <a href="/" class="">Home</span>
-                               
+
                             </li>
                             <li class="smenu-pare">
                                 <a href="/about.html" class="">About Us</span>
-                               
+
                             </li>
                             <li class="smenu-pare"> <a href="services.html" class="">Service</span></li>
                             <li><a href="plans.html">Plans</a></li>
                             <li><a href="gallery.html">Gallery</a></li>
                             <li><a href="contact.html">Contact Us</a></li>
                             <li><a href="all-profiles.html">All Profile</a></li>
-                           
+
                         </ul>
                     </div>
-            
+
                     <!-- USER PROFILE -->
                     <div class="userprofileinmobileview">
                         <a href="/">
                             <div id="user-profile" class="head-pro">
-                             
+
                             </div>
                         </a>
-                        
+
                         <script>
-                            document.addEventListener('DOMContentLoaded', () => { 
-                                   let isLoggedIn=true;                               
-                                const userProfile = document.getElementById('user-profile');                       
-                                if (isLoggedIn) {                                
+                            document.addEventListener('DOMContentLoaded', () => {
+                                let isLoggedIn = true;
+                                const userProfile = document.getElementById('user-profile');
+                                if (isLoggedIn) {
                                     userProfile.innerHTML = `
                                         <img src="images/profiles/1.jpg" alt="" loading="lazy">
                                         <b>Advisor</b><br>
                                         <h4>Ashley emyy</h4>
                                     `;
                                 } else {
-                                  
+
                                     userProfile.style.backgroundColor = "#eda435";
                                     userProfile.style.display = "flex";
                                     userProfile.style.justifyContent = "center";
@@ -239,32 +232,32 @@
                                     userProfile.style.color = "white";
                                     userProfile.style.borderRadius = "20px";
                                     userProfile.style.paddingBottom = "4px";
-                        
+
                                     userProfile.innerHTML = `
                                         <span>Login</span>
                                     `;
                                 }
                             });
                         </script>
-                        
-                        
+
+
                     </div>
-            
+
                     <div class="mob-menu">
                         <div class="mob-me-ic">
-                            
-                        
+
+
                             <span class="mobile-menu" data-mob="mobile">
                                 <img src="images/icon/menu.svg" alt="">
                             </span>
                         </div>
                     </div>
-                   
+
                 </div>
             </div>
         </div>
     </div>
-    
+
     <div class="mob-me-all mobile_menu">
         <div class="mob-me-clo"><img src="images/icon/close.svg" alt=""></div>
         <div class="mv-bus">
@@ -279,8 +272,8 @@
                 <li><a href="all-profiles.html">All Profile</a></li>
                 <li id="user-action"></li>
             </ul>
-            <script>   
-                const isLoggedIn = false; 
+            <script>
+                const isLoggedIn = false;
                 const userActionElement = document.getElementById('user-action');
                 if (isLoggedIn) {
                     userActionElement.innerHTML = '<a href="dashboard.html">User Dashboard</a>';
@@ -297,7 +290,8 @@
                 <div class="row">
                     <span class="pri">Pricing</span>
                     <h1>Get Started <br> Pick your Plan Now</h1>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+                    <p>Explore premium features to connect with compatible profiles and take the first step towards your
+                        happy future. </p>
                     <span class="nocre">No credit card required</span>
                 </div>
             </div>
@@ -309,60 +303,188 @@
     <section>
         <div class="plans-main">
             <div class="container">
-                <div class="row">
-                    <ul>
-                        <li>
-                            <div class="pri-box">
-                                <h2>Free</h2>
-                                <p>Printer took a type and scrambled </p>
-                                <a href="sign-up.html" class="cta">Get Started</a>
-                                <span class="pri-cou"><b>$0</b>/mo</span>
-                                <ol>
-                                    <li><i class="fa fa-close close" aria-hidden="true"></i> 5 Premium Profiles view /mo
-                                    </li>
-                                    <li><i class="fa fa-check" aria-hidden="true"></i>Free user profile can view</li>
-                                    <li><i class="fa fa-close close" aria-hidden="true"></i>View contact details</li>
-                                    <li><i class="fa fa-close close" aria-hidden="true"></i>Send interest</li>
-                                    <li><i class="fa fa-close close" aria-hidden="true"></i>Start Chat</li>
-                                </ol>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="pri-box pri-box-pop">
-                                <span class="pop-pln">Most popular plan</span>
-                                <h2>Gold</h2>
-                                <p>Printer took a type and scrambled </p>
-                                <a href="sign-up.html" class="cta">Get Started</a>
-                                <span class="pri-cou"><b>$349</b>/mo</span>
-                                <ol>
-                                    <li><i class="fa fa-check" aria-hidden="true"></i> 20 Premium Profiles view /mo</li>
-                                    <li><i class="fa fa-check" aria-hidden="true"></i>Free user profile can view</li>
-                                    <li><i class="fa fa-check" aria-hidden="true"></i>View contact details</li>
-                                    <li><i class="fa fa-check" aria-hidden="true"></i>Send interest</li>
-                                    <li><i class="fa fa-check" aria-hidden="true"></i>Start Chat</li>
-                                </ol>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="pri-box">
-                                <h2>Platinum</h2>
-                                <p>Printer took a type and scrambled </p>
-                                <a href="sign-up.html" class="cta">Get Started</a>
-                                <span class="pri-cou"><b>$549</b>/mo</span>
-                                <ol>
-                                    <li><i class="fa fa-check" aria-hidden="true"></i> 50 Premium Profiles view /mo</li>
-                                    <li><i class="fa fa-check" aria-hidden="true"></i>Free user profile can view</li>
-                                    <li><i class="fa fa-check" aria-hidden="true"></i>View contact details</li>
-                                    <li><i class="fa fa-check" aria-hidden="true"></i>Send interest</li>
-                                    <li><i class="fa fa-check" aria-hidden="true"></i>Start Chat</li>
-                                </ol>
-                            </div>
-                        </li>
-                    </ul>
+                <div class="row" id="plans-list">
+                    <!-- Plans will be inserted here dynamically -->
                 </div>
             </div>
         </div>
     </section>
+
+    <script>
+        // Fetch plans from API
+        
+        let isLogin = JSON.parse(localStorage.getItem('authInfo'));
+
+        function checkLoginStatus() {
+            if (!isLogin) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops',
+                    text: "Please Login First"
+                });
+                setTimeout(() => {
+                    window.location.href = "/login.html";
+                }, 500);
+                return false;
+            }
+            return true;
+        }
+
+        async function handleRazorPay(plan) {
+            if (!checkLoginStatus()) return;
+
+            console.log("Plan", plan);
+            try {
+                const response = await fetch('https://sapthapadhimatrimony.in/backend/app/CreateOrder', {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${isLogin.token}`
+                    },
+                    body: JSON.stringify({ planId: plan.id })
+                });
+
+
+                console.log("REsponsse of create order",response);
+
+                if (!response.ok) throw new Error('Network Response was Not ok');
+                const data = await response.json();
+
+                const options = {
+                    key: 'rzp_test_wiEoVPHYx1DrGq',
+                    currency: "INR",
+                    handler: function (response) {
+                        fetch('https://sapthapadhimatrimony.in/backend/app/buyPlan', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                Authorization: `Bearer ${isLogin.token}`
+                            },
+                            body: JSON.stringify({
+                                planId: plan.id,
+                                paidAmount: plan?.amount,
+                                paymentdetails: {
+                                    paymentId: response?.razorpay_payment_id,
+                                    orderId: response.razorpay_order_id,
+                                    signature: response.razorpay_signature,
+                                    paymentStatus: response.razorpay_payment_status || 'Success',
+                                },
+                            })
+                        }).then((res) => {
+                            if (!res.ok) {
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "Oops",
+                                    text: "Something went wrong"
+                                });
+                                return;
+                            }
+                            localStorage.setItem("myPlan", JSON.stringify(plan));
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Congratulations',
+                                text: 'Plan Purchase Successful',
+                            });
+                        }).catch((error) => {
+                            console.error("Error during plan purchase:", error);
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops',
+                                text: "An error occurred. Please try again.",
+                            });
+                        });
+                    },
+                    prefill: {
+                        name: isLogin?.name,
+                        email: isLogin?.email,
+                        contact: isLogin?.phone,
+                    },
+                };
+
+                const paymentObject = new window.Razorpay(options);
+                paymentObject.open();
+                paymentObject.on('payment.failed', function (response) {
+                    console.error("Payment failed:", response);
+                });
+            } catch (error) {
+                console.error("Error initiating payment:", error);
+            }
+        }
+
+        async function fetchPlans() {
+            try {
+                const response = await fetch('https://sapthapadhimatrimony.in/backend/app/listplan'); // Replace with your actual API endpoint
+                const data = await response.json();
+                console.log("Data", data);
+                displayPlans(data); // Pass the fetched data to the function to display it
+            } catch (error) {
+                console.error('Error fetching plans:', error);
+            }
+        }
+
+        // Function to dynamically display plans in the HTML
+        function displayPlans(plans) {
+            const plansContainer = document.getElementById('plans-list');
+            plansContainer.innerHTML = ''; // Clear any existing content
+
+            plans.forEach(plan => {
+                console.log("Plan", plan);
+                // Create each plan's HTML structure dynamically
+                const planElement = document.createElement('li');
+                planElement.classList.add('col');
+
+                const planBox = document.createElement('div');
+                planBox.classList.add('pri-box');
+
+                // Plan Header
+                const planTitle = document.createElement('h2');
+                planTitle.textContent = plan.name;
+                planBox.appendChild(planTitle);
+
+                // const planDescription = document.createElement('p');
+                // planDescription.textContent = plan.description || 'No description available';
+                // planBox.appendChild(planDescription);
+
+                const planCTA = document.createElement('a');
+                planCTA.href = 'sign-up.html';
+                planCTA.classList.add('cta');
+                planCTA.textContent = 'Get Started';
+                planCTA.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    handleRazorPay(plan);
+                })
+                planBox.appendChild(planCTA);
+
+                const planPrice = document.createElement('span');
+                planPrice.classList.add('pri-cou');
+                planPrice.innerHTML = `<b>$${plan.amount}</b>/6 months`;
+                planBox.appendChild(planPrice);
+
+                // Plan Features
+                const featureList = document.createElement('ol');
+                plan.features.forEach(feature => {
+                    const featureItem = document.createElement('li');
+                    const icon = document.createElement('i');
+                    icon.classList.add('fa', feature.value ? 'fa-check' : 'fa-close');
+                    icon.style.backgroundColor = feature.value ? 'green' : 'red';
+                    icon.style.display = "flex";
+                    icon.style.justifyContent = "center";
+                    icon.style.alignItems = "center";
+                    featureItem.appendChild(icon);
+                    featureItem.appendChild(document.createTextNode(`${feature.desc}`));
+                    featureList.appendChild(featureItem);
+                });
+                planBox.appendChild(featureList);
+
+                planElement.appendChild(planBox);
+                plansContainer.appendChild(planElement);
+            });
+        }
+
+        // Call the function when the page loads
+        window.onload = fetchPlans;
+    </script>
+
     <!-- END -->
 
     <!-- FOOTER -->
@@ -434,4 +556,5 @@
 
 
 <!-- Mirrored from rn53themes.net/themes/matrimo/plans.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 27 Nov 2024 05:15:37 GMT -->
+
 </html>

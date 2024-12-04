@@ -20,13 +20,13 @@
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/animate.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <script src="jsfile/script.js"></script>
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="js/html5shiv.min.js"></script>
-      <script src="js/respond.min.js"></script>
-      <![endif]-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.5.0/dist/sweetalert2.min.css">
+
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.5.0/dist/sweetalert2.min.js"></script>
+
 </head>
 
 <body>
@@ -321,10 +321,10 @@
                         <div class="filt-com lhs-cate">
                             <h4><i class="fa fa-search" aria-hidden="true"></i> I'm looking for</h4>
                             <div class="form-group">
-                                <select class="chosen-select">
+                                <select class="chosen-select" id="genderFilter">
                                     <option value="">I'm looking for</option>
-                                    <option value="Men">Men</option>
-                                    <option value="Women">Women</option>
+                                    <option value="male">Men</option>
+                                    <option value="female">Women</option>
                                 </select>
                             </div>
                         </div>
@@ -448,7 +448,7 @@
                             </div>
                             <div class="short-rhs">
                                 <ul>
-                                    
+
                                     <li>
                                         <div class="sort-grid sort-grid-1">
                                             <i class="fa fa-th-large" aria-hidden="true"></i>
@@ -472,7 +472,69 @@
                         </div>
                         <script>
                             document.addEventListener('DOMContentLoaded', () => {
-                                // Function to fetch and display users
+                                
+                                const handleSendRequest = async (userId, userName) => {
+                                    try {
+                                        const authInfo = JSON.parse(localStorage.getItem('authInfo'));
+                                        if (!authInfo) {
+                                            Swal.fire({
+                                                icon: 'error',
+                                                title: 'Oops...',
+                                                text: "Please Login First",
+                                            });
+                                           setTimeout(()=>{
+                                            window.location.href = '/login';
+                                           },800)
+                                            return;
+                                        }
+
+                                        const response = await fetch('https://sapthapadhimatrimony.in/backend/app/sendrequest', {
+                                            method: 'POST',
+                                            headers: {
+                                                'Content-Type': 'application/json',
+                                                Authorization: `Bearer ${authInfo.token}`,
+                                            },
+                                            body: JSON.stringify({ toUserId: userId }),
+                                        });
+
+                                        const result = await response.json();
+
+                                        if (response.ok) {
+                                            Swal.fire({
+                                                icon: 'success',
+                                                title: 'Success',
+                                                text: `Request sent to ${userName}!`,
+                                            });
+                                        } else {
+                                            Swal.fire({
+                                                icon: 'error',
+                                                title: 'Error',
+                                                text: result.message || 'Failed to send request.',
+                                            });
+                                        }
+                                    } catch (error) {
+                                        console.error('Error sending request:', error);
+                                        Swal.fire({
+                                            icon: 'error',
+                                            title: 'Error',
+                                            text: 'Something went wrong. Please try again later.',
+                                        });
+                                    }
+                                };
+
+                                const attachSendRequestListeners = () => {
+                                    const buttons = document.querySelectorAll('.send-request-btn');
+                                    buttons.forEach(button => {
+                                        button.addEventListener('click', () => {
+                                            const userId = button.getAttribute('data-userid');
+                                            const userName = button.getAttribute('data-username');
+                                            handleSendRequest(userId, userName);
+                                        });
+                                    });
+                                };
+
+                                //end atach listner
+
                                 const fetchUsers = async () => {
                                     try {
                                         const authInfo = JSON.parse(localStorage.getItem('authInfo'));
@@ -484,11 +546,14 @@
                                         if (data && Array.isArray(data)) {
                                             const profileList = document.getElementById('profileList');
                                             profileList.innerHTML = ''; // Clear any previous content
-                                              
-                                               
-                                         document.getElementById('totalProfile').innerText=data?.length
+                                            let filteredProfiles = data;
+                                            filteredProfiles = applyGenderFilter(filteredProfiles);
+                                            console.log("all profile data", data)
+                                            console.log("all profile firlter data", filteredProfiles)
+
+                                            document.getElementById('totalProfile').innerText = data?.length
                                             // Iterate over each profile and create HTML for it
-                                            data.forEach(profile => {
+                                            filteredProfiles.forEach(profile => {
                                                 const listItem = document.createElement('li');
                                                 listItem.innerHTML = `
                                                 
@@ -517,9 +582,10 @@
                                                                 <span>Height: ${profile.height || 'N/A'}</span>
                                                             </div>
                                                             <div class="links">
-                                                                <span class="cta-chat">Chat now</span>
+                                                                
+                                                                <a class="cta-chat" href="user-chat.html">Chat now</a>
                                                                 <a href="#!">WhatsApp</a>
-                                                                <a href="#!" class="cta cta-sendint" data-bs-toggle="modal" data-bs-target="#sendInter">Send interest</a>
+                                                                <a href="#!" class="cta cta-sendint send-request-btn"  data-userid="${profile.userId}" data-username="${profile.name}">Send interest</a>
                                                                  <a href="profile-details.html?userId=${profile.userId}">More details</a>
                                                             </div>
                                                         </div>
@@ -533,11 +599,40 @@
                                                 `;
                                                 profileList.appendChild(listItem);
                                             });
-                                             }
+                                            attachSendRequestListeners();
+                                        }
                                     } catch (error) {
                                         console.error('Error fetching user profiles:', error);
                                     }
                                 };
+
+
+
+
+                                const applyGenderFilter = (profiles) => {
+                                    const genderFilter = document.getElementById('genderFilter').value;
+                                    console.log("genderFilter", genderFilter);
+                                    if (!genderFilter) return profiles;
+
+                                    return profiles.filter(profile => profile.gender === genderFilter);
+                                };
+
+                                const applyLocationFilter = (profiles) => {
+                                    const locationFilter = document.getElementById('locationFilter').value.toLowerCase();
+                                    if (!locationFilter) return profiles;
+
+                                    return profiles.filter(profile => profile.location.toLowerCase().includes(locationFilter));
+                                };
+
+                                const applyAgeFilter = (profiles) => {
+                                    const ageFilter = parseInt(document.getElementById('ageFilter').value, 10);
+                                    if (!ageFilter) return profiles;
+
+                                    return profiles.filter(profile => profile.age === ageFilter);
+                                };
+
+                                document.getElementById('genderFilter').addEventListener('change', fetchUsers);
+
 
                                 fetchUsers();
                             });
@@ -550,7 +645,7 @@
     <!-- END -->
 
 
-  
+
     <div class="modal fade" id="sendInter">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -623,7 +718,7 @@
             </div>
         </div>
     </div>
-   
+
     <div class="chatbox">
         <span class="comm-msg-pop-clo"><i class="fa fa-times" aria-hidden="true"></i></span>
 
@@ -651,7 +746,7 @@
             </form>
         </div>
     </div>
-   
+
     <section class="wed-hom-footer">
         <div class="container">
             <div class="row foot-supp">

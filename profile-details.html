@@ -12,10 +12,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="theme-color" content="#f6af04">
     <meta name="description" content="">
+
     <meta name="keyword" content="">
-    <!--== FAV ICON(BROWSER TAB ICON) ==-->
+
     <link rel="shortcut icon" href="images/fav.ico" type="image/x-icon">
-    <!--== CSS FILES ==-->
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             fetch('./component/topheader.html')
@@ -24,7 +25,6 @@
                 }).then((res) => {
                     document.getElementById('topheader').innerHTML = res;
                 })
-
         }
         )
     </script>
@@ -32,6 +32,10 @@
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/animate.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.5.0/dist/sweetalert2.min.css">
+
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.5.0/dist/sweetalert2.min.js"></script>
     <script src="jsfile/script.js"></script>
 </head>
 
@@ -201,19 +205,28 @@
                                 <img id="prImage" src="" loading="lazy" class="pro" alt="" style="object-fit: fill;">
                             </div>
                             <div class="s3">
-                                <a href="#!" class="cta fol cta-chat">Chat now</a>
-                                <span class="cta cta-sendint" data-toggle="modal" data-target="#sendInter">Send
+                                <a href="user-chat.html" class="cta fol cta-chat">Chat now</a>
+                                <span class="cta cta-sendint" id="setDataAttrubute" onclick="sendRequest(event)" data-toggle="modal" data-target="#sendInter">Send
                                     interest</span>
                             </div>
                         </div>
                     </div>
+                    <script>
+                        function sendRequest(event){
+                            let userId=event.target.getAttribute('data-userid')
+                            let userName=event.target.getAttribute('data-username')
+                            console.log("UserId",userId);
+                            console.log("Username",userName);
+                            handleSendRequest(userId,userName);
+                        }
+                    </script>
                     <div class="profi-pg profi-bio">
                         <div class="lhs">
                             <div class="pro-pg-intro">
                                 <h1 id="name1"></h1>
 
                                 <ul>
-                                    <li>
+                                    <li style="margin:0 8px 8px 0;">
                                         <div>
                                             <img src="images/icon/pro-city.png" loading="lazy" alt="">
                                             <span>City: <strong id="placename">New York</strong></span>
@@ -307,36 +320,26 @@
 
                             <div class="slid-inn pr-bio-c wedd-rel-pro" id="relatedProfiles">
                                 <h3>Related Profiles</h3>
-                                <ul class="slider3" id="profileList">
-
-                                </ul>
+                                <ul class="sll" id="profileList"></ul>
                             </div>
+                            <!-- Include jQuery -->
+                            <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+                            <script src="path/to/slick.min.js"></script>
+
                             <script>
-                              
                                 async function fetchProfiles() {
                                     try {
-                                       
-                                        const token = JSON.parse(localStorage.getItem("authInfo")).token; // Ensure token is stored in localStorage
-                                        if (!token) {
-                                            throw new Error("User is not logged in.");
-                                        }
-
+                                        const token = JSON.parse(localStorage.getItem("authInfo"))?.token; 
                                         const apiUrl = "https://sapthapadhimatrimony.in/backend/app/getAllUserProfile";
-
-
                                         const response = await fetch(apiUrl, {
                                             method: "GET",
                                             headers: {
-                                                "Content-Type": "application/json"
+                                                "Content-Type": "application/json",
                                             },
                                         });
-
-
                                         if (!response.ok) {
                                             throw new Error("Failed to fetch profiles.");
                                         }
-
-
                                         const profiles = await response.json();
                                         return profiles;
                                     } catch (error) {
@@ -345,8 +348,8 @@
                                     }
                                 }
 
-
                                 function renderProfiles(profiles) {
+
                                     const profileList = document.getElementById("profileList");
                                     profileList.innerHTML = "";
 
@@ -356,16 +359,18 @@
                                     }
 
                                     profiles.forEach((profile) => {
+                                        console.log("single profile", profile);
                                         const profileItem = `
                                             <li>
                                                 <div class="wedd-rel-box">
                                                     <div class="wedd-rel-img">
-                                                        <img src="https://sapthapadhimatrimony.in/backend/${profile.profilePhoto.path}" alt="${profile.name}">
-                                                        <span class="badge badge-success">${profile.age} Years old</span>
+                                                       <img src="${profile?.profilePhoto?.path ? `https://sapthapadhimatrimony.in/backend/${profile.profilePhoto.path}` : 'https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg'}" alt="${profile.name}">
+                                                        <span class="badge badge-success">${profile?.age} Years old</span>
                                                     </div>
                                                     <div class="wedd-rel-con">
-                                                        <h5>${profile.name}</h5>
-                                                        <span>City: <b>${profile.familyLocation}</b></span>
+                                                        <h5 style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; display: block;">${profile?.name}</h5>
+
+                                                        <span>City: <b>${profile?.familyLocation}</b></span>
                                                     </div>
                                                     <a href="profile-details.html" class="fclick"></a>
                                                 </div>
@@ -373,16 +378,42 @@
                                         `;
                                         profileList.insertAdjacentHTML("beforeend", profileItem);
                                     });
+                                    initializeSlider();
                                 }
 
-                                // Function to initialize the rendering process
+                                function initializeSlider() {
+                                    $(".sll").slick({
+                                        slidesToShow: 3,
+                                        slidesToScroll: 1,
+                                        autoplay: true,
+                                        autoplaySpeed: 1000,
+                                        dots: false,
+                                        arrows: true,
+                                        responsive: [
+                                            {
+                                                breakpoint: 768, 
+                                                settings: {
+                                                    slidesToShow: 1, 
+                                                    slidesToScroll: 1,
+                                                    arrows: true, 
+                                                },
+                                            },
+                                        ],
+                                    });
+                                }
+
                                 async function initializeProfiles() {
                                     const profiles = await fetchProfiles();
+                                    console.log("Profiles", profiles);
                                     renderProfiles(profiles);
                                 }
 
-                               
+                                // Initialize profiles and the slider on page load
+                                $(document).ready(() => {
+                                    initializeProfiles();
+                                });
                             </script>
+
 
                             <!-- END RELATED PROFILES -->
                         </div>
@@ -400,14 +431,18 @@
         async function getUseDetail() {
             let userDetails = await fetchUserData(userId);
             console.log("UserDetails", userDetails);
-            document.getElementById('prImage').src = `https://sapthapadhimatrimony.in/backend/${userDetails.userDetails.profilePhoto.path}` || 'https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg'; // 
-            document.getElementById('name1').innerText = userDetails.userDetails.name;
+            
+            document.getElementById('prImage').src = userDetails.userDetails.profilePhoto ? `https://sapthapadhimatrimony.in/backend/${userDetails.userDetails.profilePhoto.path}` 
+    : 'https://www.shutterstock.com/image-vector/user-profile-icon-vector-avatar-600nw-2247726673.jpg';
+           
+    document.getElementById('name1').innerText = userDetails.userDetails.name;
             document.getElementById('placename').innerText = userDetails.userDetails.familyLocation;
             document.getElementById('agee').innerText = userDetails.userDetails.age;
             document.getElementById('user-height').innerText = userDetails.userDetails.height + ' cm';
             document.getElementById('work').innerText = userDetails.userDetails.occupation;
             document.getElementById('phone-no').innerText = "Phone: " + userDetails.user.phone;
-
+            document.getElementById('setDataAttrubute').setAttribute('data-username',userDetails.userDetails.name);
+            document.getElementById('setDataAttrubute').setAttribute('data-userId',userDetails?.userDetails?.userId);
             if (userDetails.userDetails.bio) {
 
                 document.getElementById('bio').style.display = 'block'
