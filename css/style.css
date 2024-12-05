@@ -10638,7 +10638,7 @@ h2.db-tit{
     }
 
     .hom-top:before {
-        width: 65px;
+        width: 25px;
         height: 94px;
         background-size: 154px;
         background-position: -33px -43px;
@@ -11351,10 +11351,31 @@ h2.db-tit{
         display: none;
     }
 }
+@media screen and (min-width:650px) {
+    #hamburger{
+        display: none;
+    }
+    .hom-top:before{
+        width: 15px;
+    }
+}
 @media screen and (max-width:650px) {
     .hom-partners ul li {
         padding: 0px 5px 20px 5px;
         width: 100%;
+    }
+    #hamburger{
+        display: block;
+    }
+    .shivamsidebar{
+        width: 0;
+        height: 0;
+        overflow: hidden; 
+        position: absolute;
+        background: #fff; 
+        transition: all 0.3s ease; 
+        box-shadow: 0px 4px 6px rgba(0,0,0,0.1); 
+        z-index: 1000;
     }
 
     .hom-coup-test ul li {
