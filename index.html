@@ -384,16 +384,15 @@
                         <script src="path/to/slick.min.js"></script>
                 
                         <script>
+                            let userId=JSON.parse(localStorage.getItem('authInfo'))?.userId;
+                            console.log("UserId",userId);
                             async function fetchProfiles() {
                                 try {
-                                    const token = JSON.parse(localStorage.getItem("authInfo"))?.token;
-                                    const apiUrl = "https://sapthapadhimatrimony.in/backend/app/recommendedProfiles";
+                                    const apiUrl = `https://sapthapadhimatrimony.in/backend/app/getAllUserProfile?id=${userId}`;
                                     const response = await fetch(apiUrl, {
                                         method: "GET",
                                         headers: {
-                                            "Content-Type": "application/json",
-                                            Authorization: `Bearer ${token}`
-                                        },
+                                            "Content-Type": "application/json"                                        },
                                     });
                                     if (!response.ok) {
                                         throw new Error("Failed to fetch profiles.");
