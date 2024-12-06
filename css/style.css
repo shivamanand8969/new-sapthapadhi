@@ -11366,14 +11366,24 @@ h2.db-tit{
     .hom-top:before{
         width: 15px;
     }
+    
+}
+.home-page-search-box{
+    display: flex;
+    justify-content: center;
+    flex-direction:row;
 }
 #profileimage{
     height: 100px;
 }
+
 @media screen and (max-width:650px) {
     .hom-partners ul li {
         padding: 0px 5px 20px 5px;
         width: 100%;
+    }
+    .home-page-search-box{
+       flex-direction: column;
     }
     #hamburger{
         display: block;
