@@ -3625,6 +3625,7 @@ span.mail::before {
     position: absolute;
     left: 10px;
     top: 8px;
+    display: none;
 }
 
 .pro-ave-yes {
