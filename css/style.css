@@ -112,7 +112,11 @@ body {
         --mtop: 61px;
     }
 }
-
+@media screen and (max-width:630px){
+    #dashboardmargintop{
+        margin-top: 0px;
+    }
+}
 @media screen and (max-width: 769px) {
     :root {
         --mtop: 50px;
@@ -219,6 +223,10 @@ img{
 /*-------------------------------------------------------*/
 /* PRELOAD
 /*-------------------------------------------------------*/
+#dashboardmargintop{
+    margin-top: 40px;
+}
+
 #preloader {
     position: fixed;
     inset: 0px;
@@ -11359,6 +11367,9 @@ h2.db-tit{
         width: 15px;
     }
 }
+#profileimage{
+    height: 100px;
+}
 @media screen and (max-width:650px) {
     .hom-partners ul li {
         padding: 0px 5px 20px 5px;
@@ -11367,11 +11378,16 @@ h2.db-tit{
     #hamburger{
         display: block;
     }
+    #profileimage{
+        height: 200px;
+    }
     .shivamsidebar{
         width: 0;
         height: 0;
         overflow: hidden; 
-        position: absolute;
+        position: fixed;
+        top: 0;
+        left: 0;
         background: #fff; 
         transition: all 0.3s ease; 
         box-shadow: 0px 4px 6px rgba(0,0,0,0.1); 
@@ -11448,6 +11464,13 @@ h2.db-tit{
     .ab-sec2 ul li {
         width: 100%;
         padding: 15px;
+    }
+    #dashboardmargintop{
+        margin-top: 0px;
+    }
+    .db-nav{
+        box-shadow: 0 0px 0px 0px #00000024;
+
     }
     
     .pro-pg-intro ul li {}
@@ -11715,6 +11738,7 @@ h2.db-tit{
         margin: 13px 2px;
     }
 }
+
 
 /*-------------------------------------------------------*/
 /* When the browser is between 0px and 550px wide,below css will be applied.

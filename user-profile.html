@@ -208,55 +208,98 @@
             fetchUserDetails();
         </script>
         <section>
-            <div class="db" style="margin-top: 40px;">
+            <div class="db" id="dashboardmargintop">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-4 col-lg-3">
+                        <div id="hamburger" style="cursor: pointer; font-size: 24px; margin: 10px;">
+                            &#9776; <!-- Hamburger icon -->
+                        </div>
+                        <div id="sidebar" class="col-md-4 col-lg-3 shivamsidebar" >
                             <div class="db-nav">
-                                <div class="db-nav-pro">
-                                    <img id="profileimage" src="" class="img-fluid" alt="">
+                                <div class="db-nav-pro" style="background-color: #fefcf4; border-radius: 10px;">
+                                    <img src="images/profiles/12.jpg"
+                                        style="object-fit: contain; width: 100%;" id="profileimage"
+                                        class="img-fluid" alt="">
                                 </div>
+                                <div id="closeSidebar"
+                                    style="cursor: pointer; font-size: 30px; position: absolute; top: 10px; right: 10px; color: #000;">
+                                    &times;</div>
+    
                                 <div class="db-nav-list">
-                                    <ul>
-                                        <li>
-                                            <a href="user-dashboard.html">
-                                                <i class="fa fa-tachometer" aria-hidden="true"></i>Dashboard
-                                            </a>
+                                    <ul style="list-style: none; padding: 0;">
+                                        <li><a href="user-dashboard.html" ><i class="fa fa-tachometer"
+                                                    aria-hidden="true"></i>Dashboard</a></li>
+                                        <li><a href="user-profile.html" class="act"><i class="fa fa-male"
+                                                    aria-hidden="true" ></i>Profile</a></li>
+                                        <li><a href="user-interests.html"><i class="fa fa-handshake-o"
+                                                    aria-hidden="true"></i>Interests</a></li>
+                                        <li><a href="user-chat.html"><i class="fa fa-commenting-o"
+                                                    aria-hidden="true"></i>Chat list</a></li>
+                                        <li><a href="user-plan.html"><i class="fa fa-money" aria-hidden="true"></i>Plan</a>
                                         </li>
-                                        <li>
-                                            <a href="user-profile.html" class="act">
-                                                <i class="fa fa-male" aria-hidden="true"></i>Profile
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="user-interests.html">
-                                                <i class="fa fa-handshake-o" aria-hidden="true"></i>Interests
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="user-chat.html">
-                                                <i class="fa fa-commenting-o" aria-hidden="true"></i>Chat list
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="user-plan.html">
-                                                <i class="fa fa-money" aria-hidden="true"></i>Plan
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="user-setting.html">
-                                                <i class="fa fa-cog" aria-hidden="true"></i>Setting
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-sign-out" aria-hidden="true"></i>Log out
-                                            </a>
-                                        </li>
+                                        <li><a href="user-setting.html"><i class="fa fa-cog"
+                                                    aria-hidden="true"></i>Setting</a></li>
+                                        <li><a href="#" id="logoutButton"><i class="fa fa-sign-out"
+                                                    aria-hidden="true"></i>Log out</a></li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
+    
+                        <script>
+                            document.addEventListener('DOMContentLoaded', () => {
+                                const hamburger = document.getElementById('hamburger');
+                                const sidebar = document.getElementById('sidebar');
+                                const closeSidebar = document.getElementById('closeSidebar');
+    
+                                let isSidebarOpen = false;
+    
+                                hamburger.addEventListener('click', (event) => {
+                                    event.stopPropagation();
+                                    if (isSidebarOpen) {
+                                        sidebar.style.width = '0';
+                                        sidebar.style.height = '0';
+                                        sidebar.style.overflow = 'hidden';
+                                        isSidebarOpen = false;
+                                    } else {
+                                        sidebar.style.width = '100%';
+                                        sidebar.style.height = '100%';
+                                        sidebar.style.overflow = 'visible';
+                                        isSidebarOpen = true;
+                                    }
+                                });
+    
+                                // Hide sidebar when clicking outside of it
+                                document.addEventListener('click', (event) => {
+                                    if (isSidebarOpen && !sidebar.contains(event.target) && event.target !== hamburger) {
+                                        sidebar.style.width = '0';
+                                        sidebar.style.height = '0';
+                                        sidebar.style.overflow = 'hidden';
+                                        isSidebarOpen = false;
+                                    }
+                                });
+    
+                                closeSidebar.addEventListener('click', () => {
+                                    sidebar.style.width = '0';
+                                    sidebar.style.height = '0';
+                                    sidebar.style.overflow = 'hidden';
+                                    isSidebarOpen = false;
+                                });
+    
+                                // Logout functionality
+                                const logoutButton = document.getElementById('logoutButton');
+                                logoutButton.addEventListener('click', (event) => {
+                                    event.preventDefault(); // Prevent default link behavior
+                                    const confirmLogout = confirm('Are you sure you want to log out?');
+                                    if (confirmLogout) {
+                                        localStorage.removeItem('authInfo');
+                                        window.location.reload(true);
+                                        window.location.href = '/login.html';
+                                    }
+                                });
+                            });
+                        </script>
+    
                         <div class="col-md-8 col-lg-9">
                             <div class="row">
                                 <div class="col-md-12 col-lg-6 col-xl-8 db-sec-com">
