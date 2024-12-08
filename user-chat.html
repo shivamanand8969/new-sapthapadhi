@@ -27,10 +27,8 @@
                 }).then((res) => {
                     document.getElementById('topheader').innerHTML = res;
                 })
-                 
-           
-            }
-    )
+        }
+        )
     </script>
 </head>
 
@@ -225,12 +223,11 @@
                     <div id="hamburger" style="cursor: pointer; font-size: 24px; margin: 10px;">
                         &#9776; <!-- Hamburger icon -->
                     </div>
-                    <div id="sidebar" class="col-md-4 col-lg-3 shivamsidebar" >
+                    <div id="sidebar" class="col-md-4 col-lg-3 shivamsidebar">
                         <div class="db-nav">
                             <div class="db-nav-pro" style="background-color: #fefcf4; border-radius: 10px;">
-                                <img src="images/profiles/12.jpg"
-                                    style="object-fit: contain; width: 100%;" id="profileimage"
-                                    class="img-fluid" alt="">
+                                <img src="images/profiles/12.jpg" style="object-fit: contain; width: 100%;"
+                                    id="profileimage" class="img-fluid" alt="">
                             </div>
                             <div id="closeSidebar"
                                 style="cursor: pointer; font-size: 30px; position: absolute; top: 10px; right: 10px; color: #000;">
@@ -238,7 +235,7 @@
 
                             <div class="db-nav-list">
                                 <ul style="list-style: none; padding: 0;">
-                                    <li><a href="user-dashboard.html" ><i class="fa fa-tachometer"
+                                    <li><a href="user-dashboard.html"><i class="fa fa-tachometer"
                                                 aria-hidden="true"></i>Dashboard</a></li>
                                     <li><a href="user-profile.html"><i class="fa fa-male"
                                                 aria-hidden="true"></i>Profile</a></li>
@@ -323,8 +320,8 @@
                                     </div>
                                     <script>
                                         // Fetch token from localStorage
-                                        let token = JSON.parse(localStorage.getItem('authInfo'))?.token;
-                                        
+                                        let user1 = JSON.parse(localStorage.getItem('authInfo'));
+                                        let token = user1.token;
                                         // Fetch users from the API
                                         async function fetchUsers() {
                                             try {
@@ -351,13 +348,12 @@
                                             }
                                         }
 
-                                        // Render profiles into the user list
+
                                         function renderProfiles(profiles) {
                                             const userlist = document.getElementById("userlist");
                                             userlist.innerHTML = ""; // Clear existing content
 
                                             profiles.forEach((profile) => {
-                                                console.log("Profile", profile);
                                                 const { firstName: name, time, unreadCount } = profile; // Adjust keys based on API response
                                                 let image = profile.profilePhoto ? `http://sapthapadhimatrimony.in/backend/${profile.profilePhoto.path}` : "https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg"
                                                 // Create a new list item for each profile
@@ -379,24 +375,84 @@
                                                             </div>
                                                         </div>
                                                     `;
-                                                li.addEventListener('click',()=> openChatBox(profile.id,name, image));
+                                                li.addEventListener('click', () => openChatBox(profile.id, name, image));
                                                 userlist.appendChild(li);
                                             });
                                             function openChatBox(userId, userName, userImage) {
-                                                console.log("Hellow shivam anand",userId)
-                                            const chatBox = document.querySelector('.chatbox');
-                                            chatBox.classList.add('open');
-                                            chatBox.setAttribute('data-user-id', userId);
-                                            document.querySelector(".intename2").textContent = userName;
-                                            document.querySelector(".intephoto2").src = userImage;
+                                                console.log("Hellow shivam anand", userId)
+                                                const chatBox = document.querySelector('.chatbox');
+                                                chatBox.classList.add('open');
+                                                chatBox.setAttribute('data-user-id', userId);
+                                                document.querySelector(".intename2").textContent = userName;
+                                                document.querySelector(".intephoto2").src = userImage;
 
-                                            const chatMessages = chatbox.querySelector(".chat-box-messages .chat-con");
-                                            chatMessages.innerHTML = "";
-                                        }
+                                                const chatMessages = chatBox.querySelector(".chat-box-messages .chat-con");
+                                                chatMessages.innerHTML = "";
+                                                previousMessage(userId)
+
+                                            }
                                         }
 
                                         // Call fetchUsers to fetch and display the users
                                         fetchUsers();
+
+
+                                        const mergeMessages = (myMessages, allMessages, myUserId, userId) => {
+                                            const combinedMessages = [...myMessages, ...allMessages];
+                                            combinedMessages.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+
+                                            return combinedMessages
+                                                .filter(message => {
+                                                    const isMyMessage = message.fromUser == myUserId && message.toUser == userId;
+                                                    const isUserMessage = message.fromUser == userId && message.toUser == myUserId;
+                                                    return isMyMessage || isUserMessage;
+                                                })
+                                                .map(message => {
+                                                    const messageFrom = message.fromUser == myUserId ? 'me' : 'user';
+                                                    return {
+                                                        messageFrom,
+                                                        message: message.message,
+                                                        timestamp: message.timestamp,
+                                                    };
+                                                });
+                                        };
+
+
+                                        async function previousMessage(userId) {
+                                            let userMessage = await fetch(`https://sapthapadhimatrimony.in/backend/app/messages/${userId}`);
+                                            userMessage = await userMessage.json();
+                                            let response = await fetch(`https://sapthapadhimatrimony.in/backend/app/messages/${user1.userId}`);
+                                            let myMessage = await response.json();
+
+                                            let allMessage = mergeMessages(myMessage, userMessage, user1?.userId, userId);
+                                            console.log("AlleMessage", allMessage);
+
+                                            const chatBoxMessages = document.querySelector('.chat-box-messages');
+                                            chatBoxMessages.innerHTML = ''; // Clear existing content
+
+                                            // Loop through each merged message and create the appropriate elements
+                                            allMessage.forEach((msg) => {
+                                                const messageDiv = document.createElement('div');
+                                                messageDiv.classList.add('chat-con');
+
+                                                const chatLhs = document.createElement('div');
+                                                chatLhs.classList.add('chat-lhs');
+                                                chatLhs.innerText = msg.messageFrom == 'user' ? msg.message : '';
+
+                                                const chatRhs = document.createElement('div');
+                                                chatRhs.classList.add('chat-rhs');
+                                                chatRhs.innerText = msg.messageFrom == 'me' ? msg.message : '';
+
+                                                messageDiv.appendChild(chatLhs);
+                                                messageDiv.appendChild(chatRhs);
+                                                chatBoxMessages.appendChild(messageDiv);
+                                            });
+                                        }
+
+                                        previousMessage(userId)
+
+
+
                                     </script>
 
                                 </div>
@@ -416,7 +472,8 @@
             <div class="row wed-foot-link wed-foot-link-1">
                 <div class="col-md-4">
                     <h4>Get In Touch</h4>
-                    <p>Address: No 43, 2nd cross, DURGA NAGAR, KERE KODI HOSAKEREHALLI BSK 3RD STAGE BANGALORE 560085</p>
+                    <p>Address: No 43, 2nd cross, DURGA NAGAR, KERE KODI HOSAKEREHALLI BSK 3RD STAGE BANGALORE 560085
+                    </p>
                     <p>Phone: <a href="tel:+917904462944">+91 9900241088 </a></p>
                     <p>Email: <a href="mailto:info@example.com">sapthapadhimatrimony.com@gmail.com</a></p>
                 </div>
@@ -451,7 +508,7 @@
             </div>
         </div>
     </section>
-  
+
 
     <!-- CHAT CONVERSATION BOX START -->
     <div class="chatbox">
@@ -464,7 +521,7 @@
                     <h4><b class="intename2">Julia</b>,</h4>
                     <span class="avlsta avilyes">Available online</span>
                 </div>
-                <div class="s2 chat-box-messages">
+                <div class="s2 chat-box-messages" style="padding:26px 15px 86px;">
                     <span class="chat-wel">Start a new chat!!! now</span>
                     <div class="chat-con">
                         <div class="chat-lhs">Hi</div>
@@ -473,7 +530,8 @@
                     <!--<span>Start A New Chat!!! Now</span>-->
                 </div>
                 <div class="s3">
-                    <input type="text" name="chat_message" placeholder="Type a message here.." required="">
+                    <input type="text" name="chat_message" id="messagebox" placeholder="Type a message here.."
+                        required="">
                     <button id="chat_send1" name="chat_send" type="submit">Send <i class="fa fa-paper-plane-o"
                             aria-hidden="true"></i>
                     </button>
@@ -481,6 +539,65 @@
             </form>
         </div>
     </div>
+
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+    <script>
+        const socket = io('https://sapthapadhimatrimony.in', {
+            path: '/backend/socket.io',
+            transports: ['websocket'],
+            withCredentials: true,
+            reconnection: true,
+            reconnectionAttempts: Infinity,
+            reconnectionDelay: 1000,
+            reconnectionDelayMax: 5000,
+            randomizationFactor: 0.5,
+        });
+
+        socket.on('connect', () => {
+            console.log("Socet is connected");
+        })
+        socket.on('disconnect', () => {
+            console.log("Socket is disconnect");
+        })
+
+        socket.on('messageiscomming', (message) => {
+            appendMessage('user', message);
+        });
+
+        let user = document.querySelector('.chatbox');
+        let userid = user.getAttribute('data-user-id');
+
+        document.getElementById('chat_send').addEventListener('click', () => {
+            console.log("userid", userid);
+            const message = document.getElementById('messagebox').value.trim();
+            if (message) {
+                socket.emit('sendMessage', { userId, message });
+                appendMessage('me', message);
+                document.getElementById('messagebox').value = '';
+            }
+        });
+
+        document.getElementById('messagebox').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                const message = document.getElementById('messagebox').value.trim();
+                if (message) {
+                    socket.emit('sendMessage', { userId, message });
+                    appendMessage('me', message);
+                    document.getElementById('messagebox').value = '';
+                }
+            }
+        });
+        setTimeout(() => {
+            socket.emit('messageiscomming', 'Hello! How are you?');
+        }, 2000);
+        let newMessage = '';
+
+        console.log("socket", socket);
+
+    </script>
+
+
     <!-- END -->
 
     <!-- Optional JavaScript -->
