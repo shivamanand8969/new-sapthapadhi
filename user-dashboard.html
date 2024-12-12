@@ -166,11 +166,10 @@
                                     userProfile.style.borderRadius = "20px";
                                     userProfile.style.paddingBottom = "4px";
                                     userProfile.style.width = "100px";
-                                    userProfile.style.height = "50px";
+                                    userProfile.style.height = "35px";
                                     userProfile.style.cursor = "pointer";
 
-                                    userProfile.innerHTML = `<span>Login</span>`;
-                                    profileLink.href = '/login.html'; // Redirect to login page
+userProfile.innerHTML = `<span  style="color: white;">Login</span>`;                                    profileLink.href = '/login.html'; // Redirect to login page
                                 }
                             });
                         </script>
@@ -207,10 +206,11 @@
                 <li id="user-action"></li>
             </ul>
             <script>
-                const isLoggedIn = false;
+                               const isLoggedIn = JSON.parse(localStorage.getItem('authInfo'));
+
                 const userActionElement = document.getElementById('user-action');
                 if (isLoggedIn) {
-                    userActionElement.innerHTML = '<a href="dashboard.html">User Dashboard</a>';
+                    userActionElement.innerHTML = '<a href="user-dashboard.html">User Dashboard</a>';
                 } else {
                     userActionElement.innerHTML = '<a href="login.html">Login</a>';
                 }

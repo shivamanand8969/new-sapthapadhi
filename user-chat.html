@@ -19,6 +19,11 @@
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/animate.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.5.0/dist/sweetalert2.min.css">
+
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.5.0/dist/sweetalert2.min.js"></script>
+   
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             fetch('./component/topheader.html')
@@ -162,11 +167,10 @@
                                     userProfile.style.borderRadius = "20px";
                                     userProfile.style.paddingBottom = "4px";
                                     userProfile.style.width = "100px";
-                                    userProfile.style.height = "50px";
+                                    userProfile.style.height = "35px";
                                     userProfile.style.cursor = "pointer";
 
-                                    userProfile.innerHTML = `<span>Login</span>`;
-                                    profileLink.href = '/login.html'; // Redirect to login page
+                                    userProfile.innerHTML = `<span  style="color: white;">Login</span>`; profileLink.href = '/login.html'; // Redirect to login page
                                 }
                             });
                         </script>
@@ -203,10 +207,11 @@
                 <li id="user-action"></li>
             </ul>
             <script>
-                const isLoggedIn = false;
+                const isLoggedIn = JSON.parse(localStorage.getItem('authInfo'));
+
                 const userActionElement = document.getElementById('user-action');
                 if (isLoggedIn) {
-                    userActionElement.innerHTML = '<a href="dashboard.html">User Dashboard</a>';
+                    userActionElement.innerHTML = '<a href="user-dashboard.html">User Dashboard</a>';
                 } else {
                     userActionElement.innerHTML = '<a href="login.html">Login</a>';
                 }
@@ -379,6 +384,20 @@
                                                 userlist.appendChild(li);
                                             });
                                             function openChatBox(userId, userName, userImage) {
+                                                let myplan = JSON.parse(localStorage.getItem('myPlan'));
+                                                console.log("Myplan.name",myplan.name);
+                                                if (myplan?.name !== "Gold Plan") {
+                                                    Swal.fire({
+                                                        icon: "warning",
+                                                        title: "Oops",
+                                                        text: "Please Purchase Gold Plan for Chat"
+                                                    });
+                                                    setTimeout(()=>{
+                                                        window.location.href="/plans.html"
+                                                    },2000)
+                                                    return;
+                                                }
+
                                                 console.log("Hellow shivam anand", userId)
                                                 const chatBox = document.querySelector('.chatbox');
                                                 chatBox.classList.add('open');

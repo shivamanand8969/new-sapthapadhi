@@ -54,8 +54,6 @@
          
     </div>
   
-
-    
   
     <div class="hom-top">
         <div class="container" style="padding-inline: 2px;">
@@ -143,11 +141,10 @@
                                     userProfile.style.borderRadius = "20px";
                                     userProfile.style.paddingBottom = "4px";
                                     userProfile.style.width = "100px";
-                                    userProfile.style.height = "50px";
+                                    userProfile.style.height = "35px";
                                     userProfile.style.cursor = "pointer";
                     
-                                    userProfile.innerHTML = `<span>Login</span>`;
-                                    profileLink.href = '/login.html'; // Redirect to login page
+userProfile.innerHTML = `<span  style="color: white;">Login</span>`;                                    profileLink.href = '/login.html'; // Redirect to login page
                                 }
                             });
                         </script>
@@ -184,10 +181,10 @@
                 <li id="user-action"></li>
             </ul>
             <script>   
-                const isLoggedIn = false; 
+                const isLoggedIn = JSON.parse(localStorage.getItem('authInfo'));
                 const userActionElement = document.getElementById('user-action');
                 if (isLoggedIn) {
-                    userActionElement.innerHTML = '<a href="dashboard.html">User Dashboard</a>';
+                    userActionElement.innerHTML = '<a href="user-dashboard.html">User Dashboard</a>';
                 } else {
                     userActionElement.innerHTML = '<a href="login.html">Login</a>';
                 }
@@ -197,6 +194,8 @@
    
     
     <!-- BANNER & SEARCH -->
+
+   
     <section>
         <div class="str">
             <div class="hom-head">
@@ -208,14 +207,24 @@
                                 <h1>Find your<br><b>Right Match</b> here</h1>
                                 <p>Most trusted Matrimony Brand in the World.</p>
                             </div>
+                            <script>
+                                function handlerouting(e){
+                                    e.preventDefault();
+                                    console.log("hellow world")
+                                    let age=document.querySelector('.user-age').value;
+                                    let religion=document.querySelector('.user-religion').value;
+                                    let location=document.querySelector('.user-location')
+                                    
+                                }
+                            </script>
                             <div class="ban-search chosenini">
-                                <form>
+                                <form onsubmit="handlerouting(event)">
                                     <ul class="home-page-search-box">
                                       
                                         <li class="sr-age">
                                             <div class="form-group">
                                                 <label>Age</label>
-                                                <select class="chosen-select">
+                                                <select class="chosen-select user-age">
                                                     <option value="">Age</option>
                                                     <option value="">18 to 30</option>
                                                     <option value="">31 to 40</option>
@@ -231,7 +240,7 @@
                                         <li class="sr-reli">
                                             <div class="form-group">
                                                 <label>Religion</label>
-                                                <select class="chosen-select">
+                                                <select class="chosen-select user-religion">
                                                     <option>Religion</option>
                                                     <option>Any</option>
                                                     <option>Hindu</option>
@@ -244,7 +253,7 @@
                                         <li class="sr-cit">
                                             <div class="form-group">
                                                 <label>City</label>
-                                                <select class="chosen-select">
+                                                <select class="chosen-select user-location">
                                                     <option>Location</option>
                                                     <option>Any location</option>
                                                     <option>Chennai</option>
