@@ -109,7 +109,6 @@
                                 const userProfile = document.getElementById('user-profile');
                                 const profileLink = document.getElementById('profileLink');
                                 
-                                // Check if user is logged in
                                 const authInfo = JSON.parse(localStorage.getItem('authInfo'));
                                 
                                 if (authInfo && authInfo.token) {
@@ -222,9 +221,7 @@ userProfile.innerHTML = `<span  style="color: white;">Login</span>`;            
             <h4>Profile filters <i class="fa fa-filter" aria-hidden="true"></i> </h4>
         </div>
     </section>
-    <!-- END -->
-
-    <!-- START -->
+  
     <section>
         <div class="all-weddpro all-jobs all-serexp chosenini">
             <div class="container">
@@ -448,6 +445,14 @@ userProfile.innerHTML = `<span  style="color: white;">Login</span>`;            
                                 };
 
                                 //end atach listner
+                                const getFilterFromUrl=()=>{
+                                    const urlParams=new URLSearchParams(window.location.search);
+                                    return {
+                                        gender:urlParams.get('age'),
+                                        religion:urlParams.get('religion'),
+                                        location:urlParams.get('location')
+                                    }
+                                }
 
                                 const fetchUsers = async () => {
                                     try {
@@ -664,14 +669,14 @@ userProfile.innerHTML = `<span  style="color: white;">Login</span>`;            
         <div class="container">
             <div class="row foot-supp">
                 <h2><span>Free support:</span> +91 9900241088 &nbsp;&nbsp;|&nbsp;&nbsp; <span>Email:</span>
-                    sapthapadhimatrimony.com@gmail.com</h2>
+                    sapthapadhi@gmail.com</h2>
             </div>
             <div class="row wed-foot-link wed-foot-link-1">
                 <div class="col-md-4">
                     <h4>Get In Touch</h4>
                     <p>Address: No 43, 2nd cross, DURGA NAGAR, KERE KODI HOSAKEREHALLI BSK 3RD STAGE BANGALORE 560085</p>
                     <p>Phone: <a href="tel:+917904462944">+91 9900241088 </a></p>
-                    <p>Email: <a href="mailto:info@example.com">sapthapadhimatrimony.com@gmail.com</a></p>
+                    <p>Email: <a href="mailto:info@example.com">sapthapadhi@gmail.com</a></p>
                 </div>
                 <div class="col-md-4">
                     <h4>HELP &amp; SUPPORT</h4>
@@ -682,8 +687,7 @@ userProfile.innerHTML = `<span  style="color: white;">Login</span>`;            
                         </li>
                         <li><a href="#">Feedback</a>
                         </li>
-                        <li><a href="about.html#faq">FAQs</a>
-                        </li>
+                        
                         <li><a href="about.html#testimonials">Testimonials</a>
                         </li>
                     </ul>

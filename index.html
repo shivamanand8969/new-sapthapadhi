@@ -213,8 +213,16 @@ userProfile.innerHTML = `<span  style="color: white;">Login</span>`;            
                                     console.log("hellow world")
                                     let age=document.querySelector('.user-age').value;
                                     let religion=document.querySelector('.user-religion').value;
-                                    let location=document.querySelector('.user-location')
+                                    let location=document.querySelector('.user-location').value;
                                     
+                                    let params=new URLSearchParams({
+                                        age: age || "all",
+                                        religion:religion || "all",
+                                        location:location || "all"
+                                    })
+                                    console.log("Paramss",params.toString());
+                                    window.location.href=`search-page.html?${params.toString()}`
+                                
                                 }
                             </script>
                             <div class="ban-search chosenini">
@@ -241,12 +249,16 @@ userProfile.innerHTML = `<span  style="color: white;">Login</span>`;            
                                             <div class="form-group">
                                                 <label>Religion</label>
                                                 <select class="chosen-select user-religion">
-                                                    <option>Religion</option>
-                                                    <option>Any</option>
-                                                    <option>Hindu</option>
+                                                    <option disabled selected>Religion</option>
+                                                    <option>Christianity</option>
+                                                    <option>Hinduism</option>
+                                                    <option>Islam</option>
                                                     <option>Muslim</option>
-                                                    <option>Jain</option>
-                                                    <option>Christian</option>
+                                                    <option>Judaism</option>
+                                                    <option>Shinto</option>
+                                                    <option>Confucianism</option>
+                                                    <option>Zoroastrianism</option>
+                                                    <option>Others</option>
                                                 </select>
                                             </div>
                                         </li>
@@ -254,12 +266,8 @@ userProfile.innerHTML = `<span  style="color: white;">Login</span>`;            
                                             <div class="form-group">
                                                 <label>City</label>
                                                 <select class="chosen-select user-location">
-                                                    <option>Location</option>
-                                                    <option>Any location</option>
-                                                    <option>Chennai</option>
-                                                    <option>New york</option>
-                                                    <option>Perth</option>
-                                                    <option>London</option>
+                                                    <option>India</option>
+                                                    <option>Afganistan</option>
                                                 </select>
                                             </div>
                                         </li>
@@ -1162,14 +1170,14 @@ userProfile.innerHTML = `<span  style="color: white;">Login</span>`;            
         <div class="container">
             <div class="row foot-supp">
                 <h2><span>Free support:</span> +91 9900241088 &nbsp;&nbsp;|&nbsp;&nbsp; <span>Email:</span>
-                    sapthapadhimatrimony.com@gmail.com</h2>
+                    sapthapadhi@gmail.com</h2>
             </div>
             <div class="row wed-foot-link wed-foot-link-1">
                 <div class="col-md-4">
                     <h4>Get In Touch</h4>
                     <p>Address: No 43, 2nd cross, DURGA NAGAR, KERE KODI HOSAKEREHALLI BSK 3RD STAGE BANGALORE 560085</p>
                     <p>Phone: <a href="tel:+917904462944">+91 9900241088 </a></p>
-                    <p>Email: <a href="mailto:info@example.com">sapthapadhimatrimony.com@gmail.com</a></p>
+                    <p>Email: <a href="mailto:info@example.com">sapthapadhi@gmail.com</a></p>
                 </div>
                 <div class="col-md-4">
                     <h4>HELP &amp; SUPPORT</h4>
@@ -1180,8 +1188,7 @@ userProfile.innerHTML = `<span  style="color: white;">Login</span>`;            
                         </li>
                         <li><a href="#">Feedback</a>
                         </li>
-                        <li><a href="about.html#faq">FAQs</a>
-                        </li>
+                        
                         <li><a href="about.html#testimonials">Testimonials</a>
                         </li>
                     </ul>
