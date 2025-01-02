@@ -124,9 +124,10 @@
                                         }
                     
                                         const userDetails = await response.json();
+                                        
                                         // Display user's profile
                                         userProfile.innerHTML = `
-                                            <img src="${`https://sapthapadhimatrimony.in/backend/${userDetails.userDetails.profilePhoto.path}` || 'https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg'}" alt="Profile Picture" loading="lazy" style="border-radius: 50%; width: 50px; height: 50px;">
+                                            <img src="${userDetails?.userDetails?.profilePhoto ? `https://sapthapadhimatrimony.in/backend/${userDetails?.userDetails?.profilePhoto?.path}` : 'https://i.pinimg.com/originals/f1/0f/f7/f10ff70a7155e5ab666bcdd1b45b726d.jpg'}" alt="Profile Picture" loading="lazy" style="border-radius: 50%; width: 50px; height: 50px;">
                                             <b></b><br>
                                             <h4>${userDetails.userDetails.name || 'NA'}</h4>
                                         `;
@@ -211,81 +212,81 @@ userProfile.innerHTML = `<span  style="color: white;">Login</span>`;            
                 <ul>
                     <li>
                         <div class="gal-im">
-                            <img src="images/couples/19.jpg" class="gal-siz-2" alt="" loading="lazy">
+                            <img src="https://th.bing.com/th/id/R.189ec378567d010bfeb6cda48cb8741b?rik=RNbGkluwFjaqtw&riu=http%3a%2f%2f3.bp.blogspot.com%2f-OjV0zL8_Raw%2fTuV3iq8xi1I%2fAAAAAAAAEik%2fJOXfWOJDgo0%2fw1200-h630-p-k-no-nu%2fDulhan%2b_Bridal_%2bDresses%2b_Shararay_%2band%2b_lehanga_New_Pakistani.JPG&ehk=uWnmFoUs7zdW0mx0t%2b7SXczZqCmKKToSC90bKle5U6Y%3d&risl=&pid=ImgRaw&r=0" class="gal-siz-2" alt="" loading="lazy">
                             <div class="txt">
                                 <span>Wedding Matrimony</span>
                                 <h4>Matrimony Wedding Services</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula.</p>
+                                <p>Let our expert wedding planners help you organize every detail, from the venue to the final celebration.</p>
                             </div>
                         </div>
                     </li>
                     <li>
                         <div class="gal-im">
-                            <img src="images/couples/14.jpg" class="gal-siz-2" alt="" loading="lazy">
+                            <img src="https://w0.peakpx.com/wallpaper/1001/293/HD-wallpaper-elo-castelli-on-maquillage-bollywood-in-2022-bridal-makeup-bridal-makeup-salon-bridal-jewelry-sets-brides-indian-makeup-thumbnail.jpg" class="gal-siz-2" alt="" loading="lazy">
                             <div class="txt">
                                 <span>Wedding Matrimony</span>
-                                <h4>The Ceremony</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula.</p>
+                                <h4>Bridal Makeup</h4>
+                                <p>Enhance your natural beauty with professional bridal makeup services for a flawless look on your special day.</p>
                             </div>
                         </div>
                     </li>
                     <li>
                         <div class="gal-im">
-                            <img src="images/couples/15.jpg" class="gal-siz-2" alt="" loading="lazy">
+                            <img src="https://www.redveds.com/wp-content/uploads/2023/10/DSC09423-1-scaled-2-1-6.jpeg" class="gal-siz-2" alt="" loading="lazy">
                             <div class="txt">
                                 <span>Wedding Matrimony</span>
-                                <h4>Photography & Video</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula.</p>
+                                <h4>Pre-Wedding Shoots</h4>
+                                <p>Capture the love story before the wedding with a beautiful pre-wedding photoshoot in stunning locations.</p>
                             </div>
                         </div>
                     </li>
                     <li>
                         <div class="gal-im">
-                            <img src="images/couples/16.jpg" class="gal-siz-2" alt="" loading="lazy">
+                            <img src="https://images.pexels.com/photos/2291367/pexels-photo-2291367.jpeg" class="gal-siz-2" alt="" loading="lazy">
                             <div class="txt">
                                 <span>Wedding Matrimony</span>
                                 <h4>Food Catering</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula.</p>
+                                <p>Our Food Catering service offers customized, high-quality menus with fresh ingredients, catering to all dietary needs.</p>
                             </div>
                         </div>
                     </li>
                     <li>
                         <div class="gal-im">
-                            <img src="images/couples/17.jpg" class="gal-siz-2" alt="" loading="lazy">
+                            <img src="https://t4.ftcdn.net/jpg/04/20/23/09/360_F_420230944_5zUmrpR5akRiCEZhhRtapMkpvd67Hw7C.jpg" class="gal-siz-2" alt="" loading="lazy">
                             <div class="txt">
                                 <span>Wedding Matrimony</span>
                                 <h4>Decorations</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula.</p>
+                                <p>Our Decorations service transforms your wedding venue with stunning themes, elegant floral arrangements.</p>
                             </div>
                         </div>
                     </li>
                     <li>
                         <div class="gal-im">
-                            <img src="images/couples/22.jpg" class="gal-siz-2" alt="" loading="lazy">
+                            <img src="https://media.istockphoto.com/id/471906412/photo/beautiful-table-setting-for-an-wedding-reception-or-an-event.jpg?s=612x612&w=0&k=20&c=knlIBspy-ZKuQV7bUVr_eclJmyC24ShNAva_Jh9Rwfc=" class="gal-siz-2" alt="" loading="lazy">
                             <div class="txt">
                                 <span>Wedding Matrimony</span>
                                 <h4>Wedding Halls</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula.</p>
+                                <p>Our Wedding Halls service offers a selection of beautifully designed venues, each tailored to provide the perfect setting for your celebration.</p>
                             </div>
                         </div>
                     </li>
                     <li>
                         <div class="gal-im">
-                            <img src="images/couples/21.jpg" class="gal-siz-2" alt="" loading="lazy">
+                            <img src="https://media.istockphoto.com/id/180255981/photo/bride-with-wedding-planner-in-marquee.jpg?s=612x612&w=0&k=20&c=VJEFx8MHppf8TewZYcxtheEuQXoCl3Ac_yyQv9WdXoc=" class="gal-siz-2" alt="" loading="lazy">
                             <div class="txt">
                                 <span>Wedding Matrimony</span>
-                                <h4>Wedding Registry</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula.</p>
+                                <h4>Wedding Planner</h4>
+                                <p>Let our expert wedding planners help you organize every detail, from the venue to the final celebration</p>
                             </div>
                         </div>
                     </li>
                     <li>
                         <div class="gal-im">
-                            <img src="images/couples/20.jpg" class="gal-siz-2" alt="" loading="lazy">
+                            <img src="https://www.shutterstock.com/image-photo/indian-bride-groom-performing-cake-260nw-1417085174.jpg" class="gal-siz-2" alt="" loading="lazy">
                             <div class="txt">
                                 <span>Wedding Matrimony</span>
                                 <h4>The Perfect Cake</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula.</p>
+                                <p>Our Perfect Cake service creates custom-designed wedding cakes that are not only visually stunning but also delicious, with a variety of flavors and styles to suit your taste and make your celebration even more special.</p>
                             </div>
                         </div>
                     </li>
@@ -333,7 +334,7 @@ userProfile.innerHTML = `<span  style="color: white;">Login</span>`;            
                 </div>
             </div>
             <div class="row foot-count">
-                <p>Company name Site - Trusted by over thousands of Boys & Girls for successfull marriage. <a
+                <p>sapthapadhimatrimony.in - Trusted by over thousands of Boys & Girls for successfull marriage. <a
                         href="sign-up.html" class="btn btn-primary btn-sm">Join us today !</a></p>
             </div>
         </div>

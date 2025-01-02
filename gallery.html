@@ -133,7 +133,7 @@
                                         const userDetails = await response.json();
                                         // Display user's profile
                                         userProfile.innerHTML = `
-                                            <img src="${`https://sapthapadhimatrimony.in/backend/${userDetails.userDetails.profilePhoto.path}` || 'https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg'}" alt="Profile Picture" loading="lazy" style="border-radius: 50%; width: 50px; height: 50px;">
+                                            <img src="${userDetails?.userDetails?.profilePhoto ? `https://sapthapadhimatrimony.in/backend/${userDetails?.userDetails?.profilePhoto?.path}` : 'https://i.pinimg.com/originals/f1/0f/f7/f10ff70a7155e5ab666bcdd1b45b726d.jpg'}" alt="Profile Picture" loading="lazy" style="border-radius: 50%; width: 50px; height: 50px;">
                                             <b></b><br>
                                             <h4>${userDetails.userDetails.name || 'NA'}</h4>
                                         `;
@@ -231,79 +231,42 @@ userProfile.innerHTML = `<span  style="color: white;">Login</span>`;            
                 <div class="row">
                     <div class="pr-bio-c pr-bio-gal" id="gallery">
                         <div id="image-gallery">
-                            <div class="pro-gal-imag">
-                                <div class="img-wrapper">
-                                    <a href="#!"><img src="images/gallery/1.jpg" class="img-responsive" alt=""></a>
-                                    <div class="img-overlay"><i class="fa fa-arrows-alt" aria-hidden="true"></i></div>
-                                </div>
-                            </div>
-                            <div class="pro-gal-imag">
-                                <div class="img-wrapper">
-                                    <a href="#!"><img src="images/gallery/2.jpg" class="img-responsive" alt=""></a>
-                                    <div class="img-overlay"><i class="fa fa-arrows-alt" aria-hidden="true"></i></div>
-                                </div>
-                            </div>
-                            <div class="pro-gal-imag">
-                                <div class="img-wrapper">
-                                    <a href="#!"><img src="images/gallery/3.jpg" class="img-responsive" alt=""></a>
-                                    <div class="img-overlay"><i class="fa fa-arrows-alt" aria-hidden="true"></i></div>
-                                </div>
-                            </div>
-                            <div class="pro-gal-imag">
-                                <div class="img-wrapper">
-                                    <a href="#!"><img src="images/gallery/4.jpg" class="img-responsive" alt=""></a>
-                                    <div class="img-overlay"><i class="fa fa-arrows-alt" aria-hidden="true"></i></div>
-                                </div>
-                            </div>
-                            <div class="pro-gal-imag">
-                                <div class="img-wrapper">
-                                    <a href="#!"><img src="images/gallery/5.jpg" class="img-responsive" alt=""></a>
-                                    <div class="img-overlay"><i class="fa fa-arrows-alt" aria-hidden="true"></i></div>
-                                </div>
-                            </div>
-                            <div class="pro-gal-imag">
-                                <div class="img-wrapper">
-                                    <a href="#!"><img src="images/gallery/6.jpg" class="img-responsive" alt=""></a>
-                                    <div class="img-overlay"><i class="fa fa-arrows-alt" aria-hidden="true"></i></div>
-                                </div>
-                            </div>
-                            <div class="pro-gal-imag">
-                                <div class="img-wrapper">
-                                    <a href="#!"><img src="images/gallery/7.jpg" class="img-responsive" alt=""></a>
-                                    <div class="img-overlay"><i class="fa fa-arrows-alt" aria-hidden="true"></i></div>
-                                </div>
-                            </div>
-                            <div class="pro-gal-imag">
-                                <div class="img-wrapper">
-                                    <a href="#!"><img src="images/gallery/8.jpg" class="img-responsive" alt=""></a>
-                                    <div class="img-overlay"><i class="fa fa-arrows-alt" aria-hidden="true"></i></div>
-                                </div>
-                            </div>
-                            <div class="pro-gal-imag">
-                                <div class="img-wrapper">
-                                    <a href="#!"><img src="images/gallery/9.jpg" class="img-responsive" alt=""></a>
-                                    <div class="img-overlay"><i class="fa fa-arrows-alt" aria-hidden="true"></i></div>
-                                </div>
-                            </div>
-                            <div class="pro-gal-imag">
-                                <div class="img-wrapper">
-                                    <a href="#!"><img src="images/couples/7.jpg" class="img-responsive" alt=""></a>
-                                    <div class="img-overlay"><i class="fa fa-arrows-alt" aria-hidden="true"></i></div>
-                                </div>
-                            </div>
-                            <div class="pro-gal-imag">
-                                <div class="img-wrapper">
-                                    <a href="#!"><img src="images/couples/8.jpg" class="img-responsive" alt=""></a>
-                                    <div class="img-overlay"><i class="fa fa-arrows-alt" aria-hidden="true"></i></div>
-                                </div>
-                            </div>
-                            <div class="pro-gal-imag">
-                                <div class="img-wrapper">
-                                    <a href="#!"><img src="images/couples/9.jpg" class="img-responsive" alt=""></a>
-                                    <div class="img-overlay"><i class="fa fa-arrows-alt" aria-hidden="true"></i></div>
-                                </div>
-                            </div>
                         </div>
+                        <script>
+                            // Fetch data from the API
+                            fetch("https://sapthapadhimatrimony.in/backend/admin/getGallery")
+                                .then(response => response.json())  // Parse the JSON response
+                                .then(data => {
+                                    const gallery = document.getElementById('image-gallery');  // Get the gallery element
+                                    
+                                    // Loop through each image data
+                                    data.forEach(item => {
+                                        item.photos.forEach(photo => {
+                                            const imgPath = photo.path;  // Get the image path
+                        
+                                            // Create new gallery image HTML
+                                            const galleryItem = document.createElement('div');
+                                            galleryItem.classList.add('pro-gal-imag');
+                        
+                                            galleryItem.innerHTML = `
+                                                <div class="img-wrapper">
+                                                    <a href="#!">
+                                                        <img src="https://sapthapadhimatrimony.in/backend/${imgPath}" class="img-responsive" alt="">
+                                                    </a>
+                                                    <div class="img-overlay">
+                                                        <i class="fa fa-arrows-alt" aria-hidden="true"></i>
+                                                    </div>
+                                                </div>
+                                            `;
+                                            
+                                            // Append the new image item to the gallery
+                                            gallery.appendChild(galleryItem);
+                                        });
+                                    });
+                                })
+                                .catch(error => console.error("Error fetching data: ", error));
+                        </script>
+                        
                     </div>
                 </div>
             </div>
@@ -350,7 +313,7 @@ userProfile.innerHTML = `<span  style="color: white;">Login</span>`;            
                 </div>
             </div>
             <div class="row foot-count">
-                <p>Company name Site - Trusted by over thousands of Boys & Girls for successfull marriage. <a
+                <p>sapthapadhimatrimony.in - Trusted by over thousands of Boys & Girls for successfull marriage. <a
                         href="sign-up.html" class="btn btn-primary btn-sm">Join us today !</a></p>
             </div>
         </div>

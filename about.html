@@ -123,7 +123,7 @@
                                         const userDetails = await response.json();
                                         // Display user's profile
                                         userProfile.innerHTML = `
-                                            <img src="${`https://sapthapadhimatrimony.in/backend/${userDetails.userDetails.profilePhoto.path}` || 'https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg'}" alt="Profile Picture" loading="lazy" style="border-radius: 50%; width: 50px; height: 50px;">
+                                            <img src="${userDetails?.userDetails?.profilePhoto ? `https://sapthapadhimatrimony.in/backend/${userDetails?.userDetails?.profilePhoto?.path}` : 'https://i.pinimg.com/originals/f1/0f/f7/f10ff70a7155e5ab666bcdd1b45b726d.jpg'}" alt="Profile Picture" loading="lazy" style="border-radius: 50%; width: 50px; height: 50px;">
                                             <b></b><br>
                                             <h4>${userDetails.userDetails.name || 'NA'}</h4>
                                         `;
@@ -207,17 +207,23 @@ userProfile.innerHTML = `<span  style="color: white;">Login</span>`;            
                     <div class="row">
                         <div class="hom-ban">
                             <div class="ban-tit">
-                                <span><i class="no1">#1</i> Wedding Platform</span>
-                                <h1>About Us</h1>
-                                <p>Welcome to the world’s most trusted and premium matrimony service, dedicated to helping you find your perfect match. With a strong commitment to excellence, we bring together families and hearts, creating bonds that last a lifetime.</p>
+                                <span><i class="no1">#1</i> Trusted Matrimony Platform</span>
+                                <h1>Welcome to Our Matrimony Service</h1>
+                                <p>
+                                    At <strong>Sapthapadhi Matrimony</strong>, we believe that every journey of love begins with a perfect match. 
+                                    With years of experience and a passion for uniting hearts, we are proud to offer an innovative, secure, 
+                                    and personalized matchmaking experience. Our platform connects like-minded individuals from diverse 
+                                    backgrounds to help them find their ideal partner.
+                                </p>
+                                
                             </div>
-                            
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    
     <!-- END -->
 
     <!-- START -->
@@ -228,26 +234,27 @@ userProfile.innerHTML = `<span  style="color: white;">Login</span>`;            
                     <ul>
                         <li>
                             <div>
-                                <img src="images/icon/prize.png" alt="">
-                                <h4>Genuine profiles</h4>
-                                <p>The most trusted wedding matrimony brand</p>
+                                <img src="images/icon/prize.png" alt="Genuine Profiles Icon">
+                                <h4>Verified Profiles</h4>
+                                <p>Our rigorous verification ensures you connect with genuine and serious individuals.</p>
                             </div>
                         </li>
                         <li>
                             <div>
-                                <img src="images/icon/trust.png" alt="">
-                                <h4>Most trusted</h4>
-                                <p>The most trusted wedding matrimony brand</p>
+                                <img src="images/icon/trust.png" alt="Trust Icon">
+                                <h4>Trusted by Millions</h4>
+                                <p>Join the platform trusted by countless families for finding the perfect match.</p>
                             </div>
                         </li>
                         <li>
                             <div>
-                                <img src="images/icon/rings.png" alt="">
-                                <h4>2000+ weddings</h4>
-                                <p>The most trusted wedding matrimony brand</p>
+                                <img src="images/icon/rings.png" alt="Successful Weddings Icon">
+                                <h4>Thousands of Success Stories</h4>
+                                <p>Over 2,000 happy couples have started their journey with us.</p>
                             </div>
                         </li>
                     </ul>
+                    
                 </div>
             </div>
         </div>
@@ -270,28 +277,26 @@ userProfile.innerHTML = `<span  style="color: white;">Login</span>`;            
                     <div class="col-lg-6">
                         <div class="ab-wel-rhs">
                             <div class="ab-wel-tit">
-                                <h2>Welcome to <em>Wedding matrimony</em></h2>
-                                <p>Best wedding matrimony It is a long established fact that a reader will be distracted
-                                    by the readable content of a page when looking at its layout. </p>
-                                <p> <a href="plans.html">Click here to</a> Start you matrimony service now.</p>
+                                <h2>Welcome to <em>Wedding Matrimony</em></h2>
+                                <p>Your journey towards a lifetime of happiness begins here. We are dedicated to connecting hearts and creating lifelong partnerships through a trusted and personalized matchmaking experience.</p>
+                                <p><a href="plans.html">Click here</a> to begin your journey with us today.</p>
                             </div>
                             <div class="ab-wel-tit-1">
-                                <p>There are many variations of passages of Lorem Ipsum available, but the majority have
-                                    suffered alteration in some form, by injected humour, or randomised words which
-                                    don't look even slightly believable.</p>
+                                <p>Every love story is unique, and so are the connections we create. Discover the difference with Wedding Matrimony, where tradition meets innovation to help you find your perfect match.</p>
                             </div>
+                            
                             <div class="ab-wel-tit-2">
                                 <ul>
                                     <li>
                                         <div>
                                             <i class="fa fa-phone" aria-hidden="true"></i>
-                                            <h4>Enquiry <em>+01 2242 3366</em></h4>
+                                            <h4>Enquiry <em>+91 9900241088</em></h4>
                                         </div>
                                     </li>
                                     <li>
                                         <div>
                                             <i class="fa fa-envelope-o" aria-hidden="true"></i>
-                                            <h4>Get Support <em>info@example.com</em></h4>
+                                            <h4>Get Support <em>sapthapadhi@gmail.com</em></h4>
                                         </div>
                                     </li>
                                 </ul>
@@ -358,22 +363,20 @@ userProfile.innerHTML = `<span  style="color: white;">Login</span>`;            
         <div class="hom-partners abo-partners" id="testimonials">
             <div class="container">
                 <div class="row">
-                    <!-- SUB TITLE -->
+                  
                     <div class="sub-tit-caps">
                         <h2>Customer <span class="animate animate__animated" data-ani="animate__flipInX"
                                 data-dely="0.1">Testimonials</span></h2>
                         <p>Fusce imperdiet ullamcorper fringilla.</p>
                     </div>
 
-                    <!-- TESTMONIAL BACKGROUND SHAPES -->
+                    
                     <div class="wedd-shap">
                         <span class="abo-shap-1"></span>
                         <span class="abo-shap-3"></span>
                     </div>
 
-                    <!-- SLIDER START -->
                     <div id="demo" class="carousel slide" data-ride="carousel">
-                        <!-- Wrapper for slides -->
                         <div class="carousel-inner">
                             <div class="carousel-item active">
                                 <ul>
@@ -389,14 +392,13 @@ userProfile.innerHTML = `<span  style="color: white;">Login</span>`;            
                                                     <span>(50 Reviews)</span>
                                                 </div>
                                                 <div class="ab-test-conte">
-                                                    <p>It is a long established fact that a reader will be distracted by
-                                                        the readable content of a page when looking at its layout.</p>
+                                                    <p>Wedding Matrimony helped me find my perfect life partner! The process was seamless, and the profiles were authentic. Highly recommended!</p>
                                                 </div>
                                             </div>
                                             <div class="ab-rat-user">
                                                 <img src="images/profiles/1.jpg" alt="">
                                                 <div>
-                                                    <h4>John Smith</h4>
+                                                    <h4>Rohan Sharma</h4>
                                                     <span>IT Profession</span>
                                                 </div>
                                             </div>
@@ -414,14 +416,13 @@ userProfile.innerHTML = `<span  style="color: white;">Login</span>`;            
                                                     <span>(50 Reviews)</span>
                                                 </div>
                                                 <div class="ab-test-conte">
-                                                    <p>It is a long established fact that a reader will be distracted by
-                                                        the readable content of a page when looking at its layout.</p>
+                                                    <p>Thanks to Wedding Matrimony, I met someone who shares my values and dreams. This platform truly connects hearts.</p>
                                                 </div>
                                             </div>
                                             <div class="ab-rat-user">
                                                 <img src="images/profiles/6.jpg" alt="">
                                                 <div>
-                                                    <h4>Julia Ann</h4>
+                                                    <h4>Pooja Mehta</h4>
                                                     <span>Teacher</span>
                                                 </div>
                                             </div>
@@ -439,14 +440,13 @@ userProfile.innerHTML = `<span  style="color: white;">Login</span>`;            
                                                     <span>(50 Reviews)</span>
                                                 </div>
                                                 <div class="ab-test-conte">
-                                                    <p>It is a long established fact that a reader will be distracted by
-                                                        the readable content of a page when looking at its layout.</p>
+                                                    <p>I was impressed with the user-friendly interface and verified profiles. A wonderful experience overall!  Highly recommended!</p>
                                                 </div>
                                             </div>
                                             <div class="ab-rat-user">
                                                 <img src="images/profiles/7.jpg" alt="">
                                                 <div>
-                                                    <h4>William Son</h4>
+                                                    <h4>Arjun Verma</h4>
                                                     <span>Government Staff</span>
                                                 </div>
                                             </div>
@@ -549,79 +549,7 @@ userProfile.innerHTML = `<span  style="color: white;">Login</span>`;            
     <!-- END -->
 
 
-    <!-- START -->
-    <section>
-        <div class="ab-team pg-abo-ab-team">
-            <div class="container">
-                <div class="row">
-                    <div class="home-tit">
-                        <p>OUR PROFESSIONALS</p>
-                        <h2><span>Meet Our Team</span></h2>
-                        <span class="leaf1"></span>
-                    </div>
-                    <ul>
-                        <li>
-                            <div>
-                                <img src="images/profiles/6.jpg" alt="" loading="lazy">
-                                <h4>Ashley Jen</h4>
-                                <p>Marketing Manager</p>
-                                <ul class="social-light">
-                                    <li><a href="#!"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                    <li><a href="#!"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                    <li><a href="#!"><i class="fa fa-whatsapp" aria-hidden="true"></i></a></li>
-                                    <li><a href="#!"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                                    <li><a href="#!"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                                <img src="images/profiles/7.jpg" alt="" loading="lazy">
-                                <h4>Ashley Jen</h4>
-                                <p>Marketing Manager</p>
-                                <ul class="social-light">
-                                    <li><a href="#!"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                    <li><a href="#!"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                    <li><a href="#!"><i class="fa fa-whatsapp" aria-hidden="true"></i></a></li>
-                                    <li><a href="#!"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                                    <li><a href="#!"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                                <img src="images/profiles/8.jpg" alt="" loading="lazy">
-                                <h4>Emily Arrov</h4>
-                                <p>Creative Manager</p>
-                                <ul class="social-light">
-                                    <li><a href="#!"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                    <li><a href="#!"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                    <li><a href="#!"><i class="fa fa-whatsapp" aria-hidden="true"></i></a></li>
-                                    <li><a href="#!"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                                    <li><a href="#!"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                                <img src="images/profiles/9.jpg" alt="" loading="lazy">
-                                <h4>Julia sear</h4>
-                                <p>Client Coordinator</p>
-                                <ul class="social-light">
-                                    <li><a href="#!"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                    <li><a href="#!"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                    <li><a href="#!"><i class="fa fa-whatsapp" aria-hidden="true"></i></a></li>
-                                    <li><a href="#!"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                                    <li><a href="#!"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- END -->
+   
 
     <!-- START -->
     <section>
@@ -647,94 +575,66 @@ userProfile.innerHTML = `<span  style="color: white;">Login</span>`;            
                             <div id="accordion">
                                 <div class="card">
                                     <div class="card-header">
-                                        <a class="card-link" data-toggle="collapse" href="#collapse1">
-                                            It is a long established fact
+                                        <a class="card-link collapsed" data-toggle="collapse"  onclick="toggleAnswer('collapse1')">
+                                            How do I create a profile?
                                         </a>
                                     </div>
-                                    <div id="collapse1" class="collapse show" data-parent="#accordion">
+                                    <div id="collapse1" class="collapse" data-parent="#accordion">
                                         <div class="card-body">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                                                veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                                                commodo consequat.</p>
+                                            <p>You can create a profile by signing up and filling in your personal details, preferences, and uploading a photo.</p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="card">
                                     <div class="card-header">
-                                        <a class="collapsed card-link" data-toggle="collapse" href="#collapse2">
-                                            Where can I get some?
-                                        </a>
+                                        <a class="collapsed card-link" data-toggle="collapse" onclick="toggleAnswer('collapse2')">
+                                            Is my personal information secure?                                        </a>
                                     </div>
                                     <div id="collapse2" class="collapse" data-parent="#accordion">
                                         <div class="card-body">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                                                veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                                                commodo consequat.</p>
+                                            <p>Yes, we prioritize your privacy and ensure that your personal details are safe and secure.</p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="card">
                                     <div class="card-header">
-                                        <a class="collapsed card-link" data-toggle="collapse" href="#collapse3">
-                                            Where does it come from?
+                                        <a class="collapsed card-link" data-toggle="collapse" onclick="toggleAnswer('collapse3')">
+                                            How can I search for a match?
                                         </a>
                                     </div>
                                     <div id="collapse3" class="collapse" data-parent="#accordion">
                                         <div class="card-body">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                                                veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                                                commodo consequat.</p>
+                                            <p>You can use our advanced search filters to find matches based on your preferences, such as age, location, and profession.</p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="card">
                                     <div class="card-header">
-                                        <a class="collapsed card-link" data-toggle="collapse" href="#collapse4">
-                                            Why do we use it?
+                                        <a class="collapsed card-link" data-toggle="collapse" onclick="toggleAnswer('collapse4')">
+                                            Can I communicate with other members?
                                         </a>
                                     </div>
                                     <div id="collapse4" class="collapse" data-parent="#accordion">
                                         <div class="card-body">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                                                veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                                                commodo consequat.</p>
+                                            <p>Yes, you can connect with members through chat, email, or video call features once your membership is activated.</p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="card">
                                     <div class="card-header">
-                                        <a class="collapsed card-link" data-toggle="collapse" href="#collapse5">
-                                            What is Lorem Ipsum?
+                                        <a class="collapsed card-link" data-toggle="collapse" onclick="toggleAnswer('collapse5')" >
+                                            What should I do if I face an issue?
                                         </a>
                                     </div>
                                     <div id="collapse5" class="collapse" data-parent="#accordion">
                                         <div class="card-body">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                                                veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                                                commodo consequat.</p>
+                                            <p>Contact our customer support team through the "Help" section, and we’ll assist you promptly.
+
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="card">
-                                    <div class="card-header">
-                                        <a class="collapsed card-link" data-toggle="collapse" href="#collapse6">
-                                            Contrary to popular belief
-                                        </a>
-                                    </div>
-                                    <div id="collapse6" class="collapse" data-parent="#accordion">
-                                        <div class="card-body">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                                                veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                                                commodo consequat.</p>
-                                        </div>
-                                    </div>
-                                </div>
+                              
                             </div>
                         </div>
                     </div>
@@ -744,6 +644,17 @@ userProfile.innerHTML = `<span  style="color: white;">Login</span>`;            
                         </div>
                     </div>
                 </div>
+
+<script>
+    function toggleAnswer(id) {
+        const element = document.getElementById(id);
+        if (element.classList.contains('show')) {
+            element.classList.remove('show');
+        } else {
+            element.classList.add('show');
+        }
+    }
+</script>
             </div>
         </div>
     </section>
@@ -788,7 +699,7 @@ userProfile.innerHTML = `<span  style="color: white;">Login</span>`;            
                 </div>
             </div>
             <div class="row foot-count">
-                <p>Company name Site - Trusted by over thousands of Boys & Girls for successfull marriage. <a
+                <p>sapthapadhimatrimony.in - Trusted by over thousands of Boys & Girls for successfull marriage. <a
                         href="sign-up.html" class="btn btn-primary btn-sm">Join us today !</a></p>
             </div>
         </div>

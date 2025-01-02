@@ -140,7 +140,7 @@
                                         const userDetails = await response.json();
                                         // Display user's profile
                                         userProfile.innerHTML = `
-                                        <img src="${`https://sapthapadhimatrimony.in/backend/${userDetails.userDetails.profilePhoto.path}` || 'https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg'}" alt="Profile Picture" loading="lazy" style="border-radius: 50%; width: 50px; height: 50px;">
+                                        <img src="${userDetails?.userDetails?.profilePhoto ? `https://sapthapadhimatrimony.in/backend/${userDetails?.userDetails?.profilePhoto?.path}` : 'https://i.pinimg.com/originals/f1/0f/f7/f10ff70a7155e5ab666bcdd1b45b726d.jpg'}" alt="Profile Picture" loading="lazy" style="border-radius: 50%; width: 50px; height: 50px;">
                                         <b></b><br>
                                         <h4>${userDetails.userDetails.name || 'NA'}</h4>
                                     `;
@@ -243,6 +243,8 @@ userProfile.innerHTML = `<span  style="color: white;">Login</span>`;            
                                                 aria-hidden="true"></i>Dashboard</a></li>
                                     <li><a href="user-profile.html"><i class="fa fa-male"
                                                 aria-hidden="true"></i>Profile</a></li>
+                                    <li><a href="mygallery.html"><i class="fa fa-male"
+                                                aria-hidden="true"></i>My Gallery</a></li>
                                     <li><a href="user-interests.html"><i class="fa fa-handshake-o"
                                                 aria-hidden="true"></i>Interests</a></li>
                                     <li><a href="user-chat.html"><i class="fa fa-commenting-o"
@@ -532,7 +534,7 @@ userProfile.innerHTML = `<span  style="color: white;">Login</span>`;            
                 </div>
             </div>
             <div class="row foot-count">
-                <p>Company name Site - Trusted by over thousands of Boys & Girls for successfull marriage. <a
+                <p>sapthapadhimatrimony.in - Trusted by over thousands of Boys & Girls for successfull marriage. <a
                         href="sign-up.html" class="btn btn-primary btn-sm">Join us today !</a></p>
             </div>
         </div>

@@ -23,7 +23,7 @@
 
     <!-- SweetAlert2 JS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.5.0/dist/sweetalert2.min.js"></script>
-   
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             fetch('./component/topheader.html')
@@ -55,10 +55,10 @@
             console.log("Data", data)
             let primage = document.getElementById('profileimage');
             primage.src = data.userDetails.profilePhoto ? `https://sapthapadhimatrimony.in/backend/${data.userDetails.profilePhoto.path}` : 'https://i.pinimg.com/originals/f1/0f/f7/f10ff70a7155e5ab666bcdd1b45b726d.jpg';
-            document.getElementById('name').innerText = `Name: ${data.userDetails.name}`;
-            document.getElementById('email').innerText = `Email: ${data.user.email}`;
-            document.getElementById('phone').innerText = `Phone: ${data.user.phone}`;
-            document.getElementById('gender').innerText = `Gender: ${data.userDetails.gender}`;
+            // document.getElementById('name').innerText = `Name: ${data.userDetails.name}`;
+            // document.getElementById('email').innerText = `Email: ${data.user.email}`;
+            // document.getElementById('phone').innerText = `Phone: ${data.user.phone}`;
+            // document.getElementById('gender').innerText = `Gender: ${data.userDetails.gender}`;
         }
         fetchUserDetails();
     </script>
@@ -141,7 +141,7 @@
                                         const userDetails = await response.json();
                                         // Display user's profile
                                         userProfile.innerHTML = `
-                                                <img src="${`https://sapthapadhimatrimony.in/backend/${userDetails.userDetails.profilePhoto.path}` || 'https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg'}" alt="Profile Picture" loading="lazy" style="border-radius: 50%; width: 50px; height: 50px;">
+                                                <img src="${userDetails?.userDetails?.profilePhoto ? `https://sapthapadhimatrimony.in/backend/${userDetails?.userDetails?.profilePhoto?.path}` : 'https://i.pinimg.com/originals/f1/0f/f7/f10ff70a7155e5ab666bcdd1b45b726d.jpg'}" alt="Profile Picture" loading="lazy" style="border-radius: 50%; width: 50px; height: 50px;">
                                                 <b></b><br>
                                                 <h4>${userDetails.userDetails.name || 'NA'}</h4>
                                             `;
@@ -244,6 +244,8 @@
                                                 aria-hidden="true"></i>Dashboard</a></li>
                                     <li><a href="user-profile.html"><i class="fa fa-male"
                                                 aria-hidden="true"></i>Profile</a></li>
+                                    <li><a href="mygallery.html"><i class="fa fa-male" aria-hidden="true"></i>My
+                                            Gallery</a></li>
                                     <li><a href="user-interests.html"><i class="fa fa-handshake-o"
                                                 aria-hidden="true"></i>Interests</a></li>
                                     <li><a href="user-chat.html" class="act"><i class="fa fa-commenting-o"
@@ -385,16 +387,16 @@
                                             });
                                             function openChatBox(userId, userName, userImage) {
                                                 let myplan = JSON.parse(localStorage.getItem('myPlan'));
-                                                console.log("Myplan.name",myplan.name);
+                                                console.log("Myplan.name", myplan?.name);
                                                 if (myplan?.name !== "Gold Plan") {
                                                     Swal.fire({
                                                         icon: "warning",
                                                         title: "Oops",
                                                         text: "Please Purchase Gold Plan for Chat"
                                                     });
-                                                    setTimeout(()=>{
-                                                        window.location.href="/plans.html"
-                                                    },2000)
+                                                    setTimeout(() => {
+                                                        window.location.href = "/plans.html"
+                                                    }, 2000)
                                                     return;
                                                 }
 
@@ -412,7 +414,6 @@
                                             }
                                         }
 
-                                        // Call fetchUsers to fetch and display the users
                                         fetchUsers();
 
 
@@ -447,7 +448,7 @@
                                             console.log("AlleMessage", allMessage);
 
                                             const chatBoxMessages = document.querySelector('.chat-box-messages');
-                                            chatBoxMessages.innerHTML = ''; // Clear existing content
+                                            chatBoxMessages.innerHTML = '';
 
                                             // Loop through each merged message and create the appropriate elements
                                             allMessage.forEach((msg) => {
@@ -468,7 +469,7 @@
                                             });
                                         }
 
-                                        previousMessage(userId)
+                                        // previousMessage(userId)
 
 
 
@@ -505,7 +506,7 @@
                         </li>
                         <li><a href="#">Feedback</a>
                         </li>
-                        
+
                         <li><a href="about.html#testimonials">Testimonials</a>
                         </li>
                     </ul>
@@ -521,7 +522,7 @@
                 </div>
             </div>
             <div class="row foot-count">
-                <p>Company name Site - Trusted by over thousands of Boys & Girls for successfull marriage. <a
+                <p>sapthapadhimatrimony.in - Trusted by over thousands of Boys & Girls for successfull marriage. <a
                         href="sign-up.html" class="btn btn-primary btn-sm">Join us today !</a></p>
             </div>
         </div>
@@ -531,7 +532,6 @@
     <!-- CHAT CONVERSATION BOX START -->
     <div class="chatbox">
         <span class="comm-msg-pop-clo"><i class="fa fa-times" aria-hidden="true"></i></span>
-
         <div class="inn">
             <form name="new_chat_form" method="post">
                 <div class="s1">
@@ -579,33 +579,141 @@
         })
 
         socket.on('messageiscomming', (message) => {
-            appendMessage('user', message);
+            // appendMessage('user', message);
+            console.log("message is comming....", message)
+            const chatBoxMessages = document.querySelector('.chat-box-messages');
+          
+
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('chat-con');
+
+            const chatLhs = document.createElement('div');
+            chatLhs.classList.add('chat-lhs');
+            chatLhs.innerText = message.message;
+            
+            messageDiv.appendChild(chatLhs);
+                    chatBoxMessages.appendChild(messageDiv);
+
         });
 
         let user = document.querySelector('.chatbox');
+
         let userid = user.getAttribute('data-user-id');
 
-        document.getElementById('chat_send').addEventListener('click', () => {
-            console.log("userid", userid);
+        let authInfo = JSON.parse(localStorage.getItem('authInfo'));
+
+        document.getElementById('chat_send1').addEventListener('click', async () => {
+            let user = document.querySelector('.chatbox');
+
+            let userid = user.getAttribute('data-user-id');
+            console.log("UserId", userid);
             const message = document.getElementById('messagebox').value.trim();
+            const chatBoxMessages = document.querySelector('.chat-box-messages');
+
             if (message) {
-                socket.emit('sendMessage', { userId, message });
-                appendMessage('me', message);
+                socket.emit('sendMessage', { userid, message });
+                // appendMessage('me', message);
                 document.getElementById('messagebox').value = '';
+                const messageDiv = document.createElement('div');
+                messageDiv.classList.add('chat-con');
+
+                const chatRhs = document.createElement('div');
+                chatRhs.classList.add('chat-rhs');
+                chatRhs.innerText = message;
+                try {
+                    let response = await fetch('https://sapthapadhimatrimony.in/backend/app/messages', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            fromUser: authInfo.userId,
+                            toUser: userid,
+                            message: message
+                        }),
+                    });
+
+                    if (!response.ok) {
+                        // If the server returns an error, throw it
+                        throw new Error(`Error: ${response.status} - ${response.statusText}`);
+                    }
+
+                    let data = await response.json(); // Parse the response body as JSON
+                    console.log("Message sent successfully:", data);
+                } catch (error) {
+                    console.error("Send message error:", error);
+                }
+
+                messageDiv.appendChild(chatRhs);
+                chatBoxMessages.appendChild(messageDiv);
             }
         });
 
-        document.getElementById('messagebox').addEventListener('keypress', (e) => {
+        document.getElementById('messagebox').addEventListener('keypress', async (e) => {
             if (e.key === 'Enter' && !e.shiftKey) {
                 e.preventDefault();
                 const message = document.getElementById('messagebox').value.trim();
+                const chatBoxMessages = document.querySelector('.chat-box-messages');
+                let user = document.querySelector('.chatbox');
+
+                let userid = user.getAttribute('data-user-id');
+                console.log("UserId", userid);
+
                 if (message) {
-                    socket.emit('sendMessage', { userId, message });
-                    appendMessage('me', message);
+                    socket.emit('sendMessage', { userid, message, fromUser: authInfo.userId });
+
+                    document.getElementById('messagebox').value = '';
+                    const messageDiv = document.createElement('div');
+                    messageDiv.classList.add('chat-con');
+
+                    const chatRhs = document.createElement('div');
+                    chatRhs.classList.add('chat-rhs');
+                    chatRhs.innerText = message;
+
+                    messageDiv.appendChild(chatRhs);
+                    chatBoxMessages.appendChild(messageDiv);
+                    try {
+                        let response = await fetch('https://sapthapadhimatrimony.in/backend/app/messages', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json', // Specify that the body is JSON
+                                'Accept': 'application/json',      // Optional: Specify what you accept as a response
+                            },
+                            body: JSON.stringify({
+                                fromUser: authInfo.userId,
+                                toUser: userid,
+                                message: message
+                            }),
+                        });
+
+                        if (!response.ok) {
+                            // If the server returns an error, throw it
+                            throw new Error(`Error: ${response.status} - ${response.statusText}`);
+                        }
+
+                        let data = await response.json(); // Parse the response body as JSON
+                    } catch (error) {
+                        console.error("Send message error:", error);
+                    }
+
+                    // appendMessage('me', message);
                     document.getElementById('messagebox').value = '';
                 }
             }
         });
+
+        document.getElementById('chat_send1').addEventListener('click', (e) => {
+            e.preventDefault();
+            const message = document.getElementById('messagebox').value.trim();
+            if (message) {
+                socket.emit('sendMessage', { userid, message });
+                // appendMessage('me', message);
+                document.getElementById('messagebox').value = '';
+            }
+        }
+        );
+
         setTimeout(() => {
             socket.emit('messageiscomming', 'Hello! How are you?');
         }, 2000);

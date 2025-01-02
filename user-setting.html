@@ -143,6 +143,7 @@
             document.getElementById('income').value = data?.userDetails?.annualIncome;
             document.getElementById('familyLocation').value = data?.userDetails?.familyLocation;
             document.getElementById('caste').value = data?.userDetails?.caste;
+            document.getElementById('star').value = data?.userDetails?.star;
             document.getElementById('subCaste').value = data?.userDetails?.subCaste;
             document.getElementById('country').value = data?.userDetails?.country;
         }
@@ -208,7 +209,7 @@
 
                                 // Check if user is logged in
                                 const authInfo = JSON.parse(localStorage.getItem('authInfo'));
-
+                                console.log("authInfo",authInfo)
                                 if (authInfo && authInfo.token) {
                                     try {
 
@@ -219,15 +220,17 @@
                                                 'Authorization': `Bearer ${authInfo.token}`
                                             }
                                         });
+                                        console.log("REsponse",response);
 
                                         if (!response.ok) {
-                                            throw new Error('Failed to fetch user details');
+                                            throw new Error('Failed to fetch user detailsmmmm');
                                         }
 
                                         const userDetails = await response.json();
+                                        
                                         // Display user's profile
                                         userProfile.innerHTML = `
-                                            <img src="${`https://sapthapadhimatrimony.in/backend/${userDetails.userDetails.profilePhoto.path}` || 'https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg'}" alt="Profile Picture" loading="lazy" style="border-radius: 50%; width: 50px; height: 50px;">
+                                            <img src="${userDetails?.userDetails?.profilePhoto ? `https://sapthapadhimatrimony.in/backend/${userDetails?.userDetails?.profilePhoto?.path}` : 'https://i.pinimg.com/originals/f1/0f/f7/f10ff70a7155e5ab666bcdd1b45b726d.jpg'}" alt="Profile Picture" loading="lazy" style="border-radius: 50%; width: 50px; height: 50px;">
                                             <b></b><br>
                                             <h4>${userDetails.userDetails.name || 'NA'}</h4>
                                         `;
@@ -235,7 +238,7 @@
                                         // Set link to user dashboard
                                         profileLink.href = '/user-dashboard.html';
                                     } catch (error) {
-                                        console.error('Error fetching user details:', error.message);
+                                        console.error('Error fetching user detailsssss:', error.message);
                                         renderLoginOption();
                                     }
                                 } else {
@@ -255,8 +258,8 @@
                                     userProfile.style.width = "100px";
                                     userProfile.style.height = "35px";
                                     userProfile.style.cursor = "pointer";
-
-userProfile.innerHTML = `<span  style="color: white;">Login</span>`;                                    profileLink.href = '/login.html'; // Redirect to login page
+                                    userProfile.innerHTML = `<span  style="color: white;">Login</span>`; 
+                                    profileLink.href = '/login.html';
                                 }
                             });
                         </script>
@@ -329,6 +332,8 @@ userProfile.innerHTML = `<span  style="color: white;">Login</span>`;            
                                                 aria-hidden="true"></i>Dashboard</a></li>
                                     <li><a href="user-profile.html"><i class="fa fa-male"
                                                 aria-hidden="true"></i>Profile</a></li>
+                                                <li><a href="mygallery.html"><i class="fa fa-male"
+                                                    aria-hidden="true"></i>My Gallery</a></li>
                                     <li><a href="user-interests.html"><i class="fa fa-handshake-o"
                                                 aria-hidden="true"></i>Interests</a></li>
                                     <li><a href="user-chat.html"><i class="fa fa-commenting-o"
@@ -387,7 +392,7 @@ userProfile.innerHTML = `<span  style="color: white;">Login</span>`;            
                             // Logout functionality
                             const logoutButton = document.getElementById('logoutButton');
                             logoutButton.addEventListener('click', (event) => {
-                                event.preventDefault(); // Prevent default link behavior
+                                event.preventDefault(); 
                                 const confirmLogout = confirm('Are you sure you want to log out?');
                                 if (confirmLogout) {
                                     localStorage.removeItem('authInfo');
@@ -915,23 +920,32 @@ userProfile.innerHTML = `<span  style="color: white;">Login</span>`;            
                         document.getElementById('saveBtn11').addEventListener('click', async (e) => {
                             e.preventDefault();
 
-
+                            console.log(" document.getElementById('maritalStatus').value", document.getElementById('maritalStatus').value)
                             const formData = new FormData();
 
                             // Append form data fields to the FormData object
+                            
                             formData.append('name', document.getElementById('name').value);
-                            formData.append('gender', document.getElementById('gender').value);
+                            if(document.getElementById('gender').value){
+                                formData.append('gender', document.getElementById('gender').value);
+                            }
                             formData.append('dateOfBirth', document.getElementById('dateOfBirth').value);
-                            formData.append('age', document.getElementById('age').value);
+                            if(document.getElementById('age').value){
+                                formData.append('age', document.getElementById('age').value);
+                            }
                             formData.append('height', document.getElementById('height').value);
                             formData.append('weight', document.getElementById('weight').value);
                             formData.append('lookingFor', document.getElementById('lookingFor').value);
-                            formData.append('maritalStatus', document.getElementById('maritalStatus').value);
+                            if(document.getElementById('maritalStatus').value){
+                                formData.append('maritalStatus', document.getElementById('maritalStatus').value);
+                            }
                             formData.append('bodyType', document.getElementById('bodyType').value);
                             formData.append('bodyComplexion', document.getElementById('complexion').value);
                             formData.append('physicalStatus', document.getElementById('physicalStatus').value);
                             formData.append('motherTongue', document.getElementById('motherTongue').value);
-                            formData.append('eatingHabits', document.getElementById('eatingHabits').value);
+                            if(document.getElementById('eatingHabits').value){
+                                formData.append('eatingHabits', document.getElementById('eatingHabits').value);
+                            }
                             formData.append('drinkingHabits', document.getElementById('drinkingHabits').value);
                             formData.append('religion', document.getElementById('religion').value);
                             formData.append('smokingHabits', document.getElementById('smokingHabits').value);
@@ -1017,7 +1031,7 @@ userProfile.innerHTML = `<span  style="color: white;">Login</span>`;            
                 </div>
             </div>
             <div class="row foot-count">
-                <p>Company name Site - Trusted by over thousands of Boys & Girls for successfull marriage. <a
+                <p>sapthapadhimatrimony.in - Trusted by over thousands of Boys & Girls for successfull marriage. <a
                         href="sign-up.html" class="btn btn-primary btn-sm">Join us today !</a></p>
             </div>
         </div>

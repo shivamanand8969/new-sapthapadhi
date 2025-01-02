@@ -126,7 +126,7 @@
                                         const userDetails = await response.json();
                                         // Display user's profile
                                         userProfile.innerHTML = `
-                                            <img src="${`https://sapthapadhimatrimony.in/backend/${userDetails.userDetails.profilePhoto.path}` || 'https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg'}" alt="Profile Picture" loading="lazy" style="border-radius: 50%; width: 50px; height: 50px;">
+                                            <img src="${userDetails?.userDetails?.profilePhoto ? `https://sapthapadhimatrimony.in/backend/${userDetails?.userDetails?.profilePhoto?.path}` : 'https://i.pinimg.com/originals/f1/0f/f7/f10ff70a7155e5ab666bcdd1b45b726d.jpg'}" alt="Profile Picture" loading="lazy" style="border-radius: 50%; width: 50px; height: 50px;">
                                             <b></b><br>
                                             <h4>${userDetails.userDetails.name || 'NA'}</h4>
                                         `;
@@ -212,9 +212,9 @@ userProfile.innerHTML = `<span  style="color: white;">Login</span>`;            
                     <div class="row">
                         <div class="hom-ban">
                             <div class="ban-tit">
-                                <span>We are here to assist you.</span>
-                                <h1>Contact us</h1>
-                                <p>Most Trusted and premium Matrimony Service in the World.</p>
+                                <span>Your journey to finding a perfect match begins here.</span>
+                                <h1>Contact Us</h1>
+                                <p>We are the most trusted and premium matrimony service, dedicated to helping you find your ideal life partner with ease and confidence.</p>
                             </div>
                         </div>
                     </div>
@@ -222,6 +222,7 @@ userProfile.innerHTML = `<span  style="color: white;">Login</span>`;            
             </div>
         </div>
     </section>
+    
     <!-- END -->
 
     <!-- START -->
@@ -232,30 +233,31 @@ userProfile.innerHTML = `<span  style="color: white;">Login</span>`;            
                     <ul>
                         <li>
                             <div class="we-here">
-                                <h3>Our office</h3>
-                                <p>Most Trusted and premium Matrimony Service in the World.</p>
-                                <span><i class="fa fa-phone" aria-hidden="true"></i> +92 (8800) 68 - 8960</span>
-                                <span><i class="fa fa-envelope-o" aria-hidden="true"></i> help@company.com </span>
-                                <span><i class="fa fa-map-marker" aria-hidden="true"></i> 28800 Orchard Lake Road, Suite
-                                    180 Farmington Hills, U.S.A.</span>
+                                <h3>Our Office</h3>
+                                <p>Your trusted partner in finding the perfect match for a lifetime of happiness.</p>
+                                <span><i class="fa fa-phone" aria-hidden="true"></i> +91 8969171781</span>
+                                <span><i class="fa fa-envelope-o" aria-hidden="true"></i>sapthapadhi@gmail.com</span>
+                                <span><i class="fa fa-map-marker" aria-hidden="true"></i>KERE KODI HOSAKEREHALLI BSK 3RD STAGE  BANGALORE 560085</span>
                             </div>
                         </li>
                         <li>
                             <div class="we-cont">
-                                <img src="images/icon/trust.png" alt="">
+                                <img src="images/icon/trust.png" alt="Customer Relations Icon">
                                 <h4>Customer Relations</h4>
-                                <p>Most Trusted and premium Matrimony Service in the World.</p>
-                                <a href="#!" class="cta-rou-line">Get Support</a>
+                                <p>We prioritize your happiness with dedicated support and unmatched service quality for finding your perfect match.</p>
+                                <a href="#!" class="cta-rou-line">Contact Support</a>
                             </div>
                         </li>
+                        
                         <li>
                             <div class="we-cont">
-                                <img src="images/icon/telephone.png" alt="">
+                                <img src="images/icon/telephone.png" alt="WhatsApp Support Icon">
                                 <h4>WhatsApp Support</h4>
-                                <p>Most Trusted and premium Matrimony Service in the World.</p>
-                                <a href="#!" class="cta-rou-line">Talk to sales</a>
+                                <p>Connect with us instantly on WhatsApp for quick assistance and personalized matchmaking support.</p>
+                                <a href="#!" class="cta-rou-line">Chat with Us</a>
                             </div>
                         </li>
+                        
                     </ul>
                 </div>
             </div>
@@ -324,81 +326,11 @@ userProfile.innerHTML = `<span  style="color: white;">Login</span>`;            
     <!-- END -->
 
     <!-- START -->
-    <section>
-        <div class="ab-team pg-abo-ab-team">
-            <div class="container">
-                <div class="row">
-                    <div class="home-tit">
-                        <p>OUR PROFESSIONALS</p>
-                        <h2><span>Meet Our Team</span></h2>
-                        <span class="leaf1"></span>
-                    </div>
-                    <ul>
-                        <li>
-                            <div>
-                                <img src="images/profiles/6.jpg" alt="" loading="lazy">
-                                <h4>Ashley Jen</h4>
-                                <p>Marketing Manager</p>
-                                <ul class="social-light">
-                                    <li><a href="#!"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                    <li><a href="#!"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                    <li><a href="#!"><i class="fa fa-whatsapp" aria-hidden="true"></i></a></li>
-                                    <li><a href="#!"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                                    <li><a href="#!"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                                <img src="images/profiles/7.jpg" alt="" loading="lazy">
-                                <h4>Ashley Jen</h4>
-                                <p>Marketing Manager</p>
-                                <ul class="social-light">
-                                    <li><a href="#!"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                    <li><a href="#!"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                    <li><a href="#!"><i class="fa fa-whatsapp" aria-hidden="true"></i></a></li>
-                                    <li><a href="#!"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                                    <li><a href="#!"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                                <img src="images/profiles/8.jpg" alt="" loading="lazy">
-                                <h4>Emily Arrov</h4>
-                                <p>Creative Manager</p>
-                                <ul class="social-light">
-                                    <li><a href="#!"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                    <li><a href="#!"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                    <li><a href="#!"><i class="fa fa-whatsapp" aria-hidden="true"></i></a></li>
-                                    <li><a href="#!"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                                    <li><a href="#!"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                                <img src="images/profiles/9.jpg" alt="" loading="lazy">
-                                <h4>Julia sear</h4>
-                                <p>Client Coordinator</p>
-                                <ul class="social-light">
-                                    <li><a href="#!"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                    <li><a href="#!"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                    <li><a href="#!"><i class="fa fa-whatsapp" aria-hidden="true"></i></a></li>
-                                    <li><a href="#!"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                                    <li><a href="#!"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
+    
     <!-- END -->
 
     <!-- FOOTER -->
-    <section class="wed-hom-footer">
+    <section class="wed-hom-footer" >
         <div class="container">
             <div class="row foot-supp">
                 <h2><span>Free support:</span> +91 9900241088 &nbsp;&nbsp;|&nbsp;&nbsp; <span>Email:</span>
@@ -436,7 +368,7 @@ userProfile.innerHTML = `<span  style="color: white;">Login</span>`;            
                 </div>
             </div>
             <div class="row foot-count">
-                <p>Company name Site - Trusted by over thousands of Boys & Girls for successfull marriage. <a
+                <p>sapthapadhimatrimony.in - Trusted by over thousands of Boys & Girls for successfull marriage. <a
                         href="sign-up.html" class="btn btn-primary btn-sm">Join us today !</a></p>
             </div>
         </div>
