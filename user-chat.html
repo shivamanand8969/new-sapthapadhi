@@ -559,7 +559,18 @@
     </div>
 
     <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+
     <script>
+        let auth=JSON.parse(localStorage.getItem('authInfo'));
+        console.log("Auth",auth)
+        function scrollToBottom() {
+            const chatBox = document.querySelector('.chat-box-messages');
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            scrollToBottom();
+        })
+
         const socket = io('https://sapthapadhimatrimony.in', {
             path: '/backend/socket.io',
             transports: ['websocket'],
@@ -580,9 +591,14 @@
 
         socket.on('messageiscomming', (message) => {
             // appendMessage('user', message);
+            let user = document.querySelector('.chatbox');
+
+            let userid = user.getAttribute('data-user-id');
+             
             console.log("message is comming....", message)
+            if(message?.fromUser==userid && message?.userid==auth.userId){
+
             const chatBoxMessages = document.querySelector('.chat-box-messages');
-          
 
             const messageDiv = document.createElement('div');
             messageDiv.classList.add('chat-con');
@@ -590,9 +606,11 @@
             const chatLhs = document.createElement('div');
             chatLhs.classList.add('chat-lhs');
             chatLhs.innerText = message.message;
-            
+
             messageDiv.appendChild(chatLhs);
-                    chatBoxMessages.appendChild(messageDiv);
+            chatBoxMessages.appendChild(messageDiv);
+            scrollToBottom();
+        }
 
         });
 
@@ -620,6 +638,8 @@
                 const chatRhs = document.createElement('div');
                 chatRhs.classList.add('chat-rhs');
                 chatRhs.innerText = message;
+                scrollToBottom();
+
                 try {
                     let response = await fetch('https://sapthapadhimatrimony.in/backend/app/messages', {
                         method: 'POST',
@@ -673,6 +693,8 @@
 
                     messageDiv.appendChild(chatRhs);
                     chatBoxMessages.appendChild(messageDiv);
+                    scrollToBottom();
+
                     try {
                         let response = await fetch('https://sapthapadhimatrimony.in/backend/app/messages', {
                             method: 'POST',

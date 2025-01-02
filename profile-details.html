@@ -86,7 +86,6 @@
                         </ul>
                     </div>
 
-                    <!-- USER PROFILE -->
                     <div class="userprofileinmobileview">
                         <a href="#" id="profileLink">
                             <div id="user-profile" class="head-pro"></div>
@@ -97,7 +96,6 @@
                                 const userProfile = document.getElementById('user-profile');
                                 const profileLink = document.getElementById('profileLink');
 
-                                // Check if user is logged in
                                 const authInfo = JSON.parse(localStorage.getItem('authInfo'));
 
                                 if (authInfo && authInfo.token) {
@@ -146,7 +144,7 @@
                                     userProfile.style.height = "35px";
                                     userProfile.style.cursor = "pointer";
 
-userProfile.innerHTML = `<span  style="color: white;">Login</span>`;                                    profileLink.href = '/login.html'; // Redirect to login page
+                                    userProfile.innerHTML = `<span  style="color: white;">Login</span>`; profileLink.href = '/login.html'; // Redirect to login page
                                 }
                             });
                         </script>
@@ -183,7 +181,7 @@ userProfile.innerHTML = `<span  style="color: white;">Login</span>`;            
                 <li id="user-action"></li>
             </ul>
             <script>
-                            const isLoggedIn = JSON.parse(localStorage.getItem('authInfo'));
+                const isLoggedIn = JSON.parse(localStorage.getItem('authInfo'));
 
                 const userActionElement = document.getElementById('user-action');
                 if (isLoggedIn) {
@@ -206,18 +204,19 @@ userProfile.innerHTML = `<span  style="color: white;">Login</span>`;            
                             </div>
                             <div class="s3">
                                 <a href="user-chat.html" class="cta fol cta-chat">Chat now</a>
-                                <span class="cta cta-sendint" id="setDataAttrubute" onclick="sendRequest(event)" data-toggle="modal" data-target="#sendInter">Send
+                                <span class="cta cta-sendint" id="setDataAttrubute" onclick="sendRequest(event)"
+                                    data-toggle="modal" data-target="#sendInter">Send
                                     interest</span>
                             </div>
                         </div>
                     </div>
                     <script>
-                        function sendRequest(event){
-                            let userId=event.target.getAttribute('data-userid')
-                            let userName=event.target.getAttribute('data-username')
-                            console.log("UserId",userId);
-                            console.log("Username",userName);
-                            handleSendRequest(userId,userName);
+                        function sendRequest(event) {
+                            let userId = event.target.getAttribute('data-userid')
+                            let userName = event.target.getAttribute('data-username')
+                            console.log("UserId", userId);
+                            console.log("Username", userName);
+                            handleSendRequest(userId, userName);
                         }
                     </script>
                     <div class="profi-pg profi-bio">
@@ -268,16 +267,88 @@ userProfile.innerHTML = `<span  style="color: white;">Login</span>`;            
                             <!-- PROFILE ABOUT -->
                             <div class="pr-bio-c pr-bio-conta">
                                 <h3>Contact info</h3>
-                                <ul>
-                                    <li><span><i class="fa fa-mobile" aria-hidden="true"></i><b
-                                                id="phone-no">Phone:</b></span></li>
-                                    <li><span><i class="fa fa-envelope-o" aria-hidden="true"></i><b
-                                                id="email-id"></b></span>
-                                    </li>
-                                    <li><span><i class="fa fa fa-map-marker" aria-hidden="true"></i><b
-                                                id="address-detail"></b></span></li>
-                                </ul>
+                                <div class="blur-overlay" id="contact-blur">
+                                    <!-- Content to be blurred -->
+                                    <ul>
+                                        <li><span><i class="fa fa-mobile" aria-hidden="true"></i><b id="phone-no">Phone:
+                                                    +91-9876543210</b></span></li>
+                                        <li><span><i class="fa fa-envelope-o" aria-hidden="true"></i><b
+                                                    id="email-id">example@example.com</b></span></li>
+                                        <li><span><i class="fa fa fa-map-marker" aria-hidden="true"></i><b
+                                                    id="address-detail">123, Example Street</b></span></li>
+                                    </ul>
+                                </div>
+
+                                <!-- Button for purchasing the plan -->
+                                <button id="purchase-plan-btn" class="purchase-plan-btn">
+                                    Purchase Plan to See Contact Details
+                                </button>
                             </div>
+                            <style>
+                                .pr-bio-conta {
+                                    position: relative;
+                                    padding: 15px;
+                                    background-color: #f9f9f9;
+                                    border: 1px solid #ddd;
+                                    border-radius: 5px;
+                                }
+
+                                .blur-overlay {
+                                    filter: blur(5px);
+                                    pointer-events: none;
+                                    opacity: 0.6;
+                                }
+
+                                .purchase-plan-btn {
+                                    display: block;
+                                    margin: 20px auto;
+                                    padding: 10px 20px;
+                                    font-size: 16px;
+                                    background-color: #007bff;
+                                    color: #fff;
+                                    border: none;
+                                    border-radius: 5px;
+                                    cursor: pointer;
+                                    text-align: center;
+                                    text-decoration: none;
+                                }
+
+                                .purchase-plan-btn:hover {
+                                    background-color: #0056b3;
+                                }
+
+                                .pr-bio-c.unlocked .blur-overlay {
+                                    filter: none;
+                                    pointer-events: auto;
+                                    opacity: 1;
+                                }
+
+                                .pr-bio-c.unlocked .purchase-plan-btn {
+                                    display: none;
+                                }
+                            </style>
+                            <script>
+                                document.addEventListener('DOMContentLoaded', () => {
+                                    const contactContainer = document.querySelector('.pr-bio-c');
+                                    const purchasePlanButton = document.querySelector('#purchase-plan-btn');
+                                    let blurcontainer=document.getElementById('contact-blur');
+                                    // Retrieve the plan from localStorage
+                                    const plan = JSON.parse(localStorage.getItem('myPlan'));
+
+                                    if (plan && (plan.name === "Gold Plan" || plan.name === "Platinum Plan")) {
+                                        // User has a valid plan
+                                        contactContainer.classList.add('unlocked');
+                                        blurcontainer.classList.remove('blur-overlay')
+                                    } else {
+                                        // User does not have a valid plan
+                                        purchasePlanButton.addEventListener('click', () => {
+                                            // Redirect to purchase plans page
+                                            window.location.href = '/plans.html';
+                                        });
+                                    }
+                                });
+
+                            </script>
                             <!-- END PROFILE ABOUT -->
                             <!-- PROFILE ABOUT -->
                             <div class="pr-bio-c pr-bio-info" id="details-container">
@@ -329,7 +400,7 @@ userProfile.innerHTML = `<span  style="color: white;">Login</span>`;            
                             <script>
                                 async function fetchProfiles() {
                                     try {
-                                        const token = JSON.parse(localStorage.getItem("authInfo"))?.token; 
+                                        const token = JSON.parse(localStorage.getItem("authInfo"))?.token;
                                         const apiUrl = "https://sapthapadhimatrimony.in/backend/app/getAllUserProfile";
                                         const response = await fetch(apiUrl, {
                                             method: "GET",
@@ -391,11 +462,11 @@ userProfile.innerHTML = `<span  style="color: white;">Login</span>`;            
                                         arrows: true,
                                         responsive: [
                                             {
-                                                breakpoint: 768, 
+                                                breakpoint: 768,
                                                 settings: {
-                                                    slidesToShow: 1, 
+                                                    slidesToShow: 1,
                                                     slidesToScroll: 1,
-                                                    arrows: true, 
+                                                    arrows: true,
                                                 },
                                             },
                                         ],
@@ -423,7 +494,7 @@ userProfile.innerHTML = `<span  style="color: white;">Login</span>`;            
             </div>
         </div>
     </section>
-  
+
     <script>
         let urlSearchParams = new URLSearchParams(window.location.search);
         const userId = urlSearchParams.get('userId');
@@ -431,18 +502,18 @@ userProfile.innerHTML = `<span  style="color: white;">Login</span>`;            
         async function getUseDetail() {
             let userDetails = await fetchUserData(userId);
             console.log("UserDetails", userDetails);
-            
-            document.getElementById('prImage').src = userDetails.userDetails.profilePhoto ? `https://sapthapadhimatrimony.in/backend/${userDetails.userDetails.profilePhoto.path}` 
-    : 'https://www.shutterstock.com/image-vector/user-profile-icon-vector-avatar-600nw-2247726673.jpg';
-           
-    document.getElementById('name1').innerText = userDetails.userDetails.name;
+
+            document.getElementById('prImage').src = userDetails.userDetails.profilePhoto ? `https://sapthapadhimatrimony.in/backend/${userDetails.userDetails.profilePhoto.path}`
+                : 'https://www.shutterstock.com/image-vector/user-profile-icon-vector-avatar-600nw-2247726673.jpg';
+
+            document.getElementById('name1').innerText = userDetails.userDetails.name;
             document.getElementById('placename').innerText = userDetails.userDetails.familyLocation;
             document.getElementById('agee').innerText = userDetails.userDetails.age;
             document.getElementById('user-height').innerText = userDetails.userDetails.height + ' cm';
             document.getElementById('work').innerText = userDetails.userDetails.occupation;
             document.getElementById('phone-no').innerText = "Phone: " + userDetails.user.phone;
-            document.getElementById('setDataAttrubute').setAttribute('data-username',userDetails.userDetails.name);
-            document.getElementById('setDataAttrubute').setAttribute('data-userId',userDetails?.userDetails?.userId);
+            document.getElementById('setDataAttrubute').setAttribute('data-username', userDetails.userDetails.name);
+            document.getElementById('setDataAttrubute').setAttribute('data-userId', userDetails?.userDetails?.userId);
             if (userDetails.userDetails.bio) {
 
                 document.getElementById('bio').style.display = 'block'
