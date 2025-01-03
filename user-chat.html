@@ -628,7 +628,7 @@
             const chatBoxMessages = document.querySelector('.chat-box-messages');
 
             if (message) {
-                socket.emit('sendMessage', { userid, message });
+                socket.emit('sendMessage', { userid, message, fromUser: authInfo.userId });
                 // appendMessage('me', message);
                 document.getElementById('messagebox').value = '';
                 const messageDiv = document.createElement('div');
