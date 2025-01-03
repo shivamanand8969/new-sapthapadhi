@@ -335,12 +335,7 @@ userProfile.innerHTML = `<span  style="color: white;">Login</span>`;            
                                             data-bs-toggle="dropdown">
                                             <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
                                         </button>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="#">Edid profile</a></li>
-                                            <li><a class="dropdown-item" href="#">View profile</a></li>
-                                            <li><a class="dropdown-item" href="#">Plan change</a></li>
-                                            <li><a class="dropdown-item" href="#">Download invoice now</a></li>
-                                        </ul>
+                                        
                                     </div>
                                     <div class="db-inte-main">
 
@@ -399,7 +394,7 @@ userProfile.innerHTML = `<span  style="color: white;">Login</span>`;            
         <div class="db-int-pro-1"> 
             <img src="${profile.fromUser?.details?.profilePhoto ?
                                                         `https://sapthapadhimatrimony.in/backend/${profile.fromUser.details.profilePhoto.path}` :
-                                                        'images/profiles/default.jpg'}"  alt="">  
+                                                        'images/Default_pfp.jpg'}"  alt="">  
             ${getUserBadge(profile.planType)}
         </div>
         <div class="db-int-pro-2">
@@ -412,7 +407,7 @@ userProfile.innerHTML = `<span  style="color: white;">Login</span>`;            
             <ol class="poi poi-date">
                 <li>Request on: ${formatDate(profile.createdAt)}</li>
             </ol>
-            <a href="profile-details.html" class="cta-5" target="_blank">View full profile</a>
+            <a href="profile-details.html?userId=${profile.fromUser.id}" class="cta-5" target="_blank">View full profile</a>
         </div>
         <div class="db-int-pro-3">
             <button type="button" class="btn btn-success btn-sm accept-btn" data-user-id="${profile.fromUser._id}">Accept</button>
