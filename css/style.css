@@ -6057,8 +6057,8 @@ span.mail::before {
     border-radius: 10px;
     width: 90%;
     max-width: 380px;
-    height: 80%;
-    max-height: 450px;
+    height: 90%;
+    max-height: 100vh;
     z-index: 99;
     overflow: hidden;
 }
